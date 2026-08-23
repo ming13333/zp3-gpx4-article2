@@ -1,0 +1,34 @@
+num,doi,stated_year,crossref_year,title_overlap,status,flag,stated_title,crossref_title
+1,https://doi.org/10.1056/NEJMoa1003466,2010,2010,0.0,OK,TITLE_MISMATCH,,Improved Survival with Ipilimumab in Patients with Metastatic Melanoma
+2,https://doi.org/10.1056/NEJMoa1200690,2012,2012,0.0,OK,TITLE_MISMATCH,,"Safety, Activity, and Immune Correlates of Anti–PD-1 Antibody in Cancer"
+3,https://doi.org/10.1056/NEJMoa1200694,2012,2012,0.0,OK,TITLE_MISMATCH,,Safety and Activity of Anti–PD-L1 Antibody in Patients with Advanced Cancer
+4,https://doi.org/10.1056/NEJMoa1302369,2013,2013,0.0,OK,TITLE_MISMATCH,,Nivolumab plus Ipilimumab in Advanced Melanoma
+5,https://doi.org/10.1056/nejmoa1406498,2014,2014,0.0,OK,TITLE_MISMATCH,,Genetic Basis for Clinical Response to CTLA-4 Blockade in Melanoma
+6,https://doi.org/10.1038/nature13954,2014,2014,0.0,OK,TITLE_MISMATCH,,PD-1 blockade induces responses by inhibiting adaptive immune resistance
+7,https://doi.org/10.1158/2326-6066.cir-15-0210,2016,2016,0.0,OK,TITLE_MISMATCH,,PD-1 Blockade Expands Intratumoral Memory T Cells
+8,https://doi.org/10.1186/s13073-017-0424-2,2017,2017,0.0,OK,TITLE_MISMATCH,,"Analysis of 100,000 human cancer genomes reveals the landscape of tumor mutational burden"
+9,https://doi.org/10.1016/j.cell.2014.12.033,2015,2015,0.0,OK,TITLE_MISMATCH,,Molecular and Genetic Properties of Tumors Associated with Local Immune Cytolytic Activity
+10,https://doi.org/10.1136/bmjebm-2023-112292,2024,2023,1.0,OK,YEAR_MISMATCH,"Inverse publication reporting bias favouring null, negative results","Inverse publication reporting bias favouring null, negative results"
+11,https://doi.org/10.1136/jitc-2020-000550,2020,2020,0.0,OK,TITLE_MISMATCH,,Predicting response to immunotherapy in advanced non-small-cell lung cancer using tumor mu
+12,https://doi.org/10.1016/j.cell.2025.12.002,2026,2026,0.0,OK,TITLE_MISMATCH,,Extracellular GPX4 impairs antitumor immunity via dendritic ZP3 receptors
+13,https://doi.org/10.1080/2162402x.2026.2624244,2026,2026,0.0,OK,TITLE_MISMATCH,,Enhancing immunogenic cell death by targeting the GPX4-ZP3 immune checkpoint
+14,https://doi.org/10.1016/0012-1606(80)90371-1,1980,1980,0.0,OK,TITLE_MISMATCH,,Structure and function of the zona pellucida: Identification and characterization of the p
+15,https://doi.org/10.1016/j.cell.2024.02.013,2024,2024,0.0,OK,TITLE_MISMATCH,,ZP2 cleavage blocks polyspermy by modulating the architecture of the egg coat
+16,https://doi.org/10.3390/ijms27135866,2026,2026,0.0,OK,TITLE_MISMATCH,,Co-Option and Conflict: The Deep Evolutionary History of ZP-Domain Proteins from ECMs to S
+17,https://doi.org/10.1002/ijc.35098,2024,2024,0.0,OK,TITLE_MISMATCH,,Novel ectopic expression of zona pellucida 3 glycoprotein in lung cancer promotes tumor gr
+18,https://doi.org/10.1186/s12957-026-04245-2,2026,2026,0.0,OK,TITLE_MISMATCH,,ZP3 promotes hepatocellular carcinoma progression via the Notch signaling pathway and is a
+19,https://doi.org/10.3389/fonc.2023.1233039,2023,2023,0.0,OK,TITLE_MISMATCH,,A tumor cell specific Zona Pellucida glycoprotein 3 RNA transcript encodes an intracellula
+20,https://doi.org/10.2174/1386207325666221010112601,2023,2023,0.0,OK,TITLE_MISMATCH,,Prognostic Significance of ZP3 in Hepatocellular Carcinoma
+21,https://doi.org/10.2174/0109298665350171241204153202,2025,2025,0.0,OK,TITLE_MISMATCH,,ZP3 Expression in Pancreatic Adenocarcinoma: Its Implications for the Prognosis and Therap
+22,https://doi.org/10.1038/s41598-021-86888-7,2021,2021,0.0,OK,TITLE_MISMATCH,,Prognostic and therapeutic implications of extracellular matrix associated gene signature 
+23,https://doi.org/10.1080/01616412.2025.2532039,2026,2025,0.0,OK,TITLE_MISMATCH,,Identification of potential biomarkers and therapeutic targets for cerebral venous thrombo
+24,https://doi.org/10.1038/s41392-020-00356-8,2020,2020,0.0,OK,TITLE_MISMATCH,,TREM2 marks tumor-associated macrophages
+25,https://doi.org/10.3389/fimmu.2026.1871988,2026,2026,0.0,OK,TITLE_MISMATCH,,TREM1 unleashes immunosuppression in glioma: targeting macrophage polarization as a new th
+26,https://doi.org/10.1186/s12967-026-08497-0,2026,2026,0.0,OK,TITLE_MISMATCH,,PD-1 H (VISTA) drives immunosuppressive reprogramming of glioma-associated myeloid cells t
+27,https://doi.org/10.1016/j.cell.2017.01.010,2017,2017,0.0,OK,TITLE_MISMATCH,,Genomic and Transcriptomic Features of Response to Anti-PD-1 Therapy in Metastatic Melanom
+28,https://doi.org/10.1038/nature13904,2014,2014,0.0,OK,TITLE_MISMATCH,,MPDL3280A (anti-PD-L1) treatment leads to clinical activity in metastatic bladder cancer
+29,https://doi.org/10.1016/s0140-6736(16)00561-4,2016,2016,0.0,OK,TITLE_MISMATCH,,Atezolizumab in patients with locally advanced and metastatic urothelial carcinoma who hav
+30,https://doi.org/10.1038/nature25501,2018,2018,0.0,OK,TITLE_MISMATCH,,TGFβ attenuates tumour response to PD-L1 blockade by contributing to exclusion of T cells
+31,https://doi.org/10.1016/j.cell.2017.09.028,2017,2017,0.0,OK,TITLE_MISMATCH,,Tumor and Microenvironment Evolution during Immunotherapy with Nivolumab
+32,https://doi.org/10.1016/j.cell.2015.05.044,2015,2015,1.0,OK,OK,Genomic Classification of Cutaneous Melanoma,Genomic Classification of Cutaneous Melanoma
+33,https://doi.org/10.1172/jci91190,2017,2017,0.0,OK,TITLE_MISMATCH,,IFN-γ–related mRNA profile predicts clinical response to PD-1 blockade

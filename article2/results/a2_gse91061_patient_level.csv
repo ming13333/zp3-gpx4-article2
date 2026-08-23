@@ -1,0 +1,2 @@
+Cohort,Scope,n_samples,n_patients,patients_both_visits,n_resp,n_non,U,P,r_rb,CI_low,CI_high
+GSE91061,"patient-level (Pre-first, n samples -> n patients)",105,62,42,14,48,255.0,0.1753,-0.2411,-0.5876,0.1054

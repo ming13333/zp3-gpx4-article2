@@ -1,0 +1,10 @@
+Cohort,Marker,Type,n_resp,n_non,median_resp,median_non,P,rank_biserial_r,significant
+IMvigor210,TMB (per MB),gold-standard (genomic),61,173,14.0,7.0,1.1404593757728374e-07,0.456,True
+IMvigor210,PD-L1 IHC (IC2+ vs IC0/1),gold-standard (protein IHC),35,67,34.3,16.9,0.0011878975994084418,,True
+IMvigor210,CD274 (PD-L1 mRNA),expression,68,230,0.0,0.0,0.7240199107474398,0.011,False
+GSE91061,IFN-g score (Ayers),expression/signature,10,39,3.21,2.78,0.21946803856709818,0.256,False
+GSE91061,CD8 score,expression/signature,10,39,1.78,1.1,0.16103696764368025,0.292,False
+GSE91061,CD274 (PD-L1 mRNA),expression/signature,10,39,1.27,1.04,0.700602206836516,0.082,False
+GSE91061,T-cell score,expression/signature,10,39,2.03,1.37,0.1467223967804011,0.303,False
+GSE78220,CD274 (PD-L1 mRNA),expression,15,12,1.92,1.68,0.4494558273142166,0.178,False
+GSE78220,IFN-g signature (Ayers 10g),signature,15,12,22.49,30.58,0.5419031799870584,-0.144,False

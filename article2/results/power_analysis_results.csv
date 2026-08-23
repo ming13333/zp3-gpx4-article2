@@ -1,0 +1,4 @@
+Cohort,n1,n2,r_obs,se,MDE_80,posthoc_power,TOST_bound,TOST_p,TOST_equivalent
+GSE78220,15,12,-0.0333,0.2277,0.638,0.0525,,,
+IMvigor210,68,230,-0.0146,0.0798,0.224,0.0538,0.15,0.0449,True
+GSE91061,10,39,-0.1949,0.2067,0.579,0.1563,,,

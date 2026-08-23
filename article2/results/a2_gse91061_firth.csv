@@ -1,0 +1,4 @@
+Model,Term,n,events,Firth_OR,Firth_CI_low,Firth_CI_high,Firth_P,iter
+univariable,zp3,49,10,0.816,0.377,1.767,0.6055,7
++IFN-gamma score,zp3,49,10,0.916,0.411,2.041,0.8296,9
++immunosuppression score,zp3,49,10,0.838,0.375,1.871,0.6657,9

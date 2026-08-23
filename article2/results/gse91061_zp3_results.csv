@@ -1,0 +1,2 @@
+Cohort,Tissue,Treatment,Total_samples,Valid_samples,Response_samples,Non_response_samples,ZP3_mean_response,ZP3_mean_non_response,Mann_Whitney_p,Effect_size_r,SE,CI_low,CI_high,Scope,Conclusion
+GSE91061,Melanoma,Nivolumab (anti-PD-1),109,49,10,39,1.0230780025630257,1.2679524974321263,0.3522362191881916,-0.19487179487179485,0.20672455764868075,-0.600051927863209,0.2103083381196194,Pre baseline only (audit fix),ZP3 is not a predictor of anti-PD-1 response in melanoma (pre-treatment samples)

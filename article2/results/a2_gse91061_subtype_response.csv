@@ -1,0 +1,5 @@
+subtype,n_total,n_response,n_nonresponse,zp3_mean_response,zp3_mean_nonresponse,mwu_p,estimable
+Immune,20,5,15,1.244,1.2714,0.8001,True
+Keratin,14,3,11,0.5991,0.8639,0.7692,True
+MITF-high,11,1,10,0.3579,1.7577,,False
+MITF-low,4,1,3,1.8555,1.0996,,False

@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="680"
+   height="438"
+   viewBox="0 0 680 438"
+   role="img"
+   aria-labelledby="ga-title ga-desc"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title
+     id="ga-title">ZP3 is not reproducibly associated with ICB response</title>
+  <desc
+     id="ga-desc">Three-panel graphical abstract: candidate hypothesis (ZP3 - immune context - ICB response), three-cohort validation with pre-treatment effect sizes and 95% confidence intervals (GSE78220 r=-0.03, IMvigor210 r=-0.015, GSE91061 pre-treatment r=-0.19; all not significant), robustness testing showing the apparent on-treatment-inclusive signal is absent from all pre-treatment analysis frameworks, and the conclusion that ZP3 was not reproducibly associated with ICB response in pre-treatment cohorts.</desc>
+  <defs
+     id="defs1">
+    <marker
+       id="arrow"
+       viewBox="0 0 10 10"
+       refX="8"
+       refY="5"
+       markerWidth="6"
+       markerHeight="6"
+       orient="auto-start-reverse">
+      <path
+         d="M2 1L8 5L2 9"
+         fill="none"
+         stroke="context-stroke"
+         stroke-width="1.5"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         id="path1" />
+    </marker>
+  </defs>
+  <g
+     font-family="Helvetica, Arial, 'Segoe UI', sans-serif"
+     fill="#2C2C2A"
+     id="g35">
+    <text
+       x="40"
+       y="28"
+       font-size="16"
+       font-weight="500"
+       id="text1">ZP3 as an immunotherapy biomarker?</text>
+    <text
+       x="40"
+       y="48"
+       font-size="12"
+       fill="#5F5E5A"
+       id="text2">A pre-specified, multi-cohort, association-level evaluation across anti-PD-1 / anti-PD-L1 cohorts</text>
+    <path
+       d="M180 210H202"
+       stroke="#888780"
+       stroke-width="1.5"
+       fill="none"
+       marker-end="url(#arrow)"
+       id="path2" />
+    <path
+       d="M458 210H480"
+       stroke="#888780"
+       stroke-width="1.5"
+       fill="none"
+       marker-end="url(#arrow)"
+       id="path3" />
+    <!-- ============ Panel 1: candidate hypothesis ============ -->
+    <rect
+       x="40"
+       y="78"
+       width="140"
+       height="262"
+       rx="12"
+       fill="#EEEDFE"
+       stroke="#534AB7"
+       stroke-width="0.5"
+       id="rect3" />
+    <text
+       x="110"
+       y="103"
+       text-anchor="middle"
+       font-size="14"
+       font-weight="500"
+       id="text3">Candidate signal</text>
+    <circle
+       cx="80"
+       cy="152"
+       r="24"
+       fill="#CECBF6"
+       stroke="#534AB7"
+       stroke-width="1"
+       id="circle3" />
+    <text
+       x="80"
+       y="152"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="15"
+       font-weight="500"
+       id="text4">ZP3</text>
+    <path
+       d="M106 152H134"
+       stroke="#534AB7"
+       stroke-width="1.5"
+       fill="none"
+       marker-end="url(#arrow)"
+       id="path4" />
+    <circle
+       cx="150"
+       cy="152"
+       r="16"
+       fill="#E1F5EE"
+       stroke="#0F6E56"
+       stroke-width="1"
+       id="circle4" />
+    <text
+       x="150"
+       y="152"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="10"
+       id="text5">TME</text>
+    <path
+       d="M150 172V190"
+       stroke="#0F6E56"
+       stroke-width="1.5"
+       fill="none"
+       marker-end="url(#arrow)"
+       id="path5" />
+    <rect
+       x="64"
+       y="198"
+       width="92"
+       height="42"
+       rx="8"
+       fill="#E1F5EE"
+       stroke="#0F6E56"
+       stroke-width="0.5"
+       id="rect5" />
+    <text
+       x="110"
+       y="212"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="12"
+       font-weight="500"
+       id="text6">ICB response</text>
+    <text
+       x="110"
+       y="229"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="11"
+       fill="#5F5E5A"
+       id="text7">hypothesis</text>
+    <text
+       x="110"
+       y="286"
+       text-anchor="middle"
+       font-size="12"
+       fill="#534AB7"
+       id="text8">candidate</text>
+    <text
+       x="110"
+       y="304"
+       text-anchor="middle"
+       font-size="12"
+       fill="#534AB7"
+       id="text9">not a predictor</text>
+    <path
+       d="M110 252V270"
+       stroke="#B4B2A9"
+       stroke-width="0.5"
+       stroke-dasharray="3 3"
+       fill="none"
+       id="path9" />
+    <!-- ============ Panel 2: three cohorts, pre-treatment, all null ============ -->
+    <rect
+       x="202"
+       y="78"
+       width="256"
+       height="262"
+       rx="12"
+       fill="#E6F1FB"
+       stroke="#185FA5"
+       stroke-width="0.5"
+       id="rect9" />
+    <text
+       x="330"
+       y="103"
+       text-anchor="middle"
+       font-size="14"
+       font-weight="500"
+       id="text10">Three independent cohorts (pre-treatment)</text>
+    <!-- GSE78220 -->
+    <rect
+       x="216"
+       y="112"
+       width="228"
+       height="60"
+       rx="8"
+       fill="#FFFFFF"
+       stroke="#378ADD"
+       stroke-width="0.5"
+       id="rect10" />
+    <text
+       x="226"
+       y="128"
+       font-size="12"
+       font-weight="500"
+       id="text11">GSE78220</text>
+    <text
+       x="226"
+       y="142"
+       font-size="11"
+       fill="#0C447C"
+       id="text12">melanoma · anti-PD-1 · n=27</text>
+    <line
+       x1="285"
+       y1="158"
+       x2="415"
+       y2="158"
+       stroke="#888780"
+       stroke-width="0.5"
+       stroke-dasharray="3 3"
+       id="line12" />
+    <line
+       x1="283"
+       y1="166"
+       x2="352"
+       y2="166"
+       stroke="#1D9E75"
+       stroke-width="2.5"
+       stroke-linecap="round"
+       id="line13" />
+    <line
+       x1="283"
+       y1="160"
+       x2="283"
+       y2="172"
+       stroke="#1D9E75"
+       stroke-width="1.5"
+       id="line14" />
+    <line
+       x1="352"
+       y1="160"
+       x2="352"
+       y2="172"
+       stroke="#1D9E75"
+       stroke-width="1.5"
+       id="line15" />
+    <circle
+       cx="317"
+       cy="166"
+       r="3.2"
+       fill="#1D9E75"
+       id="circle15" />
+    <text
+       x="438"
+       y="156"
+       text-anchor="end"
+       font-size="11px"
+       fill="#085041"
+       id="text15">r=-0.03 (-0.48, 0.41)</text>
+    <!-- IMvigor210 -->
+    <rect
+       x="216"
+       y="180"
+       width="228"
+       height="60"
+       rx="8"
+       fill="#FFFFFF"
+       stroke="#378ADD"
+       stroke-width="0.5"
+       id="rect15" />
+    <text
+       x="226"
+       y="196"
+       font-size="12"
+       font-weight="500"
+       id="text16">IMvigor210</text>
+    <text
+       x="226"
+       y="210"
+       font-size="11"
+       fill="#0C447C"
+       id="text17">urothelial · anti-PD-L1 · n=298</text>
+    <line
+       x1="285"
+       y1="226"
+       x2="415"
+       y2="226"
+       stroke="#888780"
+       stroke-width="0.5"
+       stroke-dasharray="3 3"
+       id="line17" />
+    <line
+       x1="307"
+       y1="234"
+       x2="331"
+       y2="234"
+       stroke="#1D9E75"
+       stroke-width="2.5"
+       stroke-linecap="round"
+       id="line18" />
+    <line
+       x1="307"
+       y1="228"
+       x2="307"
+       y2="240"
+       stroke="#1D9E75"
+       stroke-width="1.5"
+       id="line19" />
+    <line
+       x1="331"
+       y1="228"
+       x2="331"
+       y2="240"
+       stroke="#1D9E75"
+       stroke-width="1.5"
+       id="line20" />
+    <circle
+       cx="319"
+       cy="234"
+       r="3.2"
+       fill="#1D9E75"
+       id="circle20" />
+    <text
+       x="438"
+       y="224"
+       text-anchor="end"
+       font-size="11px"
+       fill="#085041"
+       id="text20">r=-0.015 (-0.17, 0.14)</text>
+    <!-- GSE91061: pre-treatment, now null (blue) -->
+    <rect
+       x="216"
+       y="248"
+       width="228"
+       height="60"
+       rx="8"
+       fill="#FFFFFF"
+       stroke="#378ADD"
+       stroke-width="0.5"
+       id="rect20" />
+    <text
+       x="226"
+       y="264"
+       font-size="12"
+       font-weight="500"
+       id="text21">GSE91061</text>
+    <text
+       x="226"
+       y="278"
+       font-size="11"
+       fill="#0C447C"
+       id="text22">melanoma · anti-PD-1 · n=49 (pre-tx)</text>
+    <line
+       x1="285"
+       y1="294"
+       x2="415"
+       y2="294"
+       stroke="#888780"
+       stroke-width="0.5"
+       stroke-dasharray="3 3"
+       id="line22" />
+    <line
+       x1="273"
+       y1="302"
+       x2="336"
+       y2="302"
+       stroke="#1D9E75"
+       stroke-width="2.5"
+       stroke-linecap="round"
+       id="line23" />
+    <line
+       x1="273"
+       y1="296"
+       x2="273"
+       y2="308"
+       stroke="#1D9E75"
+       stroke-width="1.5"
+       id="line24" />
+    <line
+       x1="336"
+       y1="296"
+       x2="336"
+       y2="308"
+       stroke="#1D9E75"
+       stroke-width="1.5"
+       id="line25" />
+    <circle
+       cx="305"
+       cy="302"
+       r="3.2"
+       fill="#1D9E75"
+       id="circle25" />
+    <text
+       x="438"
+       y="292"
+       text-anchor="end"
+       font-size="11px"
+       fill="#085041"
+       id="text25">r=-0.19 (-0.60, 0.21)</text>
+    <text
+       x="330"
+       y="328"
+       text-anchor="middle"
+       font-size="9.5"
+       fill="#4E6E8E"
+       id="text33b">Sensitivity incl. on-treatment (n=105): P=0.008 only</text>
+    <!-- ============ Panel 3: robustness: all pre-treatment frameworks null ============ -->
+    <rect
+       x="480"
+       y="78"
+       width="160"
+       height="262"
+       rx="12"
+       fill="#F1EFE8"
+       stroke="#5F5E5A"
+       stroke-width="0.5"
+       id="rect25" />
+    <text
+       x="560"
+       y="103"
+       text-anchor="middle"
+       font-size="14"
+       font-weight="500"
+       id="text26">Robustness testing</text>
+    <rect
+       x="496"
+       y="114"
+       width="128"
+       height="40"
+       rx="8"
+       fill="#EEEDFE"
+       stroke="#534AB7"
+       stroke-width="0.5"
+       id="rect26" />
+    <text
+       x="560"
+       y="128"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="12"
+       font-weight="500"
+       id="text27">MWU, pre-treatment</text>
+    <text
+       x="560"
+       y="144"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="11"
+       fill="#3C3489"
+       id="text28">P=0.35</text>
+    <path
+       d="M560 156V172"
+       stroke="#5F5E5A"
+       stroke-width="1"
+       fill="none"
+       marker-end="url(#arrow)"
+       id="path28" />
+    <rect
+       x="496"
+       y="178"
+       width="128"
+       height="40"
+       rx="8"
+       fill="#EEEDFE"
+       stroke="#534AB7"
+       stroke-width="0.5"
+       id="rect28" />
+    <text
+       x="560"
+       y="192"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="12"
+       font-weight="500"
+       id="text29">Logistic-adjusted</text>
+    <text
+       x="560"
+       y="208"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="11"
+       fill="#3C3489"
+       id="text30">P=0.45-0.58</text>
+    <path
+       d="M560 220V236"
+       stroke="#5F5E5A"
+       stroke-width="1"
+       fill="none"
+       marker-end="url(#arrow)"
+       id="path30" />
+    <rect
+       x="496"
+       y="242"
+       width="128"
+       height="40"
+       rx="8"
+       fill="#EEEDFE"
+       stroke="#534AB7"
+       stroke-width="0.5"
+       id="rect31" />
+    <text
+       x="560"
+       y="256"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="12"
+       font-weight="500"
+       id="text31">By subtype</text>
+    <text
+       x="560"
+       y="272"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="11"
+       fill="#3C3489"
+       id="text32">not significant</text>
+    <rect
+       x="496"
+       y="300"
+       width="128"
+       height="26"
+       rx="6"
+       fill="#E1F5EE"
+       stroke="#0F6E56"
+       stroke-width="0.5"
+       id="rect32" />
+    <text
+       x="560"
+       y="313"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="10"
+       fill="#085041"
+       id="text33">positive controls OK</text>
+    <!-- ============ Conclusion bar ============ -->
+    <rect
+       x="40"
+       y="360"
+       width="600"
+       height="58"
+       rx="10"
+       fill="#FCEBEB"
+       stroke="#A32D2D"
+       stroke-width="0.8"
+       id="rect33" />
+    <text
+       x="340"
+       y="382"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="14"
+       font-weight="500"
+       fill="#791F1F"
+       id="text34">Conclusion: ZP3 was not reproducibly associated with ICB response</text>
+    <text
+       x="340"
+       y="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       font-size="12"
+       fill="#A32D2D"
+       id="text35">No association in any pre-treatment cohort; apparent signal confined to on-treatment-inclusive analysis</text>
+  </g>
+</svg>

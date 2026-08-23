@@ -1,0 +1,6 @@
+model,term,n,OR,ci_low,ci_high,p
+Model1_ZP3_only,ZP3_scaled,49,0.7161,0.2985,1.718,0.4545
+Model2_ZP3_IFNg,ZP3_scaled,49,0.7304,0.2834,1.8822,0.5154
+Model2_ZP3_IFNg,IFN_scaled,49,1.6894,0.7916,3.6055,0.1752
+Model3_ZP3_Supp,ZP3_scaled,49,0.7688,0.3051,1.9375,0.5772
+Model3_ZP3_Supp,Supp_scaled,49,1.5542,0.7353,3.285,0.2482

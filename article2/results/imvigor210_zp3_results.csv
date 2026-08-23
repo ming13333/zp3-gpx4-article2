@@ -1,0 +1,2 @@
+Cohort,Cancer_Type,Treatment,Total_samples,Responders_CR_PR,NonResponders_SD_PD,ZP3_median_responders,ZP3_median_nonresponders,MannWhitney_U,MannWhitney_p,Effect_size_r,Chi2_p,Response_rate_Low_ZP3,Response_rate_High_ZP3
+IMvigor210,Urothelial_Carcinoma,Atezolizumab (anti-PD-L1),348,68,230,441.0,460.5,7706.0,0.8557256803093755,-0.014578005115089554,0.791740779759661,20.114942528735632,18.96551724137931
