@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-A2 跨队列森林图：三队列 ZP3-反应 rank-biserial r 及 95% CI（2026-08-17 审计修复版）。
-数据从冻结结果表 a2_effects_frozen.csv 自动读取（不再硬编码）。
+A2 cross-cohort forest plot: rank-biserial r and 95% CI for the ZP3-response association across three cohorts (2026-08-17 audit-fixed version).
+Data are read automatically from the frozen results table a2_effects_frozen.csv (no longer hardcoded).
 r_rb = 2U/(n1*n2) - 1, positive = higher ZP3 in responders。
-删除 "pooled effect" 表述；注明未做合并效应（队列异质：癌种/平台/治疗不同）。
-GSE91061 附敏感性分析（含 on-treatment 样本）参考标注。
+Remove the "pooled effect" wording; note that no pooled effect was computed (cohort heterogeneity: different cancer types/platforms/treatments).
+GSE91061 includes a sensitivity analysis (including on-treatment samples) as a reference annotation.
 """
 import os, csv, math
 
@@ -21,11 +21,11 @@ with open(FROZEN, encoding="utf-8-sig") as f:
             "r": float(r["r_rb"]), "lo": float(r["CI_low"]), "hi": float(r["CI_high"]),
             "nr": int(r["n_resp"]), "nn": int(r["n_non"]),
         })
-# 按队列顺序固定
+# Fixed cohort order
 order = {"GSE78220": 0, "IMvigor210": 1, "GSE91061": 2}
 cohorts.sort(key=lambda c: order.get(c["lab"].split("\n")[0], 9))
 
-# GSE91061 敏感性分析（含 on-treatment 样本）
+# GSE91061 sensitivity analysis (including on-treatment samples)
 sens_note = None
 with open(SENS, encoding="utf-8-sig") as f:
     for r in csv.DictReader(f):
@@ -33,9 +33,9 @@ with open(SENS, encoding="utf-8-sig") as f:
             sens_note = f"GSE91061 incl. on-treatment: P={float(r['P']):.3f}, r={float(r['r_rb']):+.2f} ({r['CI_str']})"
 
 W, H = 720, 640
-x0, x1 = 300, 620          # 森林图 x 范围
-y0, y1 = 100, 480          # 图区 y 范围
-rmin, rmax = -0.9, 0.9     # r 轴范围（对称，含负侧）
+x0, x1 = 300, 620          # forest plot x range
+y0, y1 = 100, 480          # plot area y range
+rmin, rmax = -0.9, 0.9     # r-axis range (symmetric, includes negative side)
 
 def lin(v, vmin, vmax, px0, px1):
     return px0 + (v - vmin) / (vmax - vmin) * (px1 - px0)
@@ -57,18 +57,18 @@ s += rect(0, 0, W, H, "#ffffff")
 s += txt(40, 34, "Supplementary Figure S1. Cross-cohort effect sizes for the ZP3-response association", size=15, weight="bold")
 s += txt(40, 52, "Rank-biserial r (95% CI); positive = higher ZP3 in responders; dashed line = null.", size=10, fill="#555")
 
-# 零线
+# zero line
 z = lin(0, rmin, rmax, x0, x1)
 s += line(x0, y0, x0, y1, "#ccc", 1)
 s += line(z, y0, z, y1, "#333", 1, "4,3")
 
-# 坐标刻度
+# axis ticks
 for tick, lab in [(-0.75, "-0.75"), (-0.5, "-0.5"), (-0.25, "-0.25"), (0, "0"), (0.25, "0.25"), (0.5, "0.5"), (0.75, "0.75")]:
     xt = lin(tick, rmin, rmax, x0, x1)
     s += line(xt, y0, xt, y0 + 6, "#666", 1)
     s += txt(xt, y0 + 20, lab, 8, "middle", fill="#555")
 
-# 每个队列一行
+# one row per cohort
 n = len(cohorts)
 row_h = (y1 - y0) / n
 for i, c in enumerate(cohorts):
@@ -79,10 +79,10 @@ for i, c in enumerate(cohorts):
     xlo, xhi, xr = lin(c["lo"], rmin, rmax, x0, x1), lin(c["hi"], rmin, rmax, x0, x1), lin(c["r"], rmin, rmax, x0, x1)
     s += line(xlo, cy, xhi, cy, "#666", 2)
     s += line(xlo, cy - 8, xlo, cy + 8, "#666", 2) + line(xhi, cy - 8, xhi, cy + 8, "#666", 2)
-    s += rect(xr - 6, cy - 6, 12, 12, "#2980b9", "#000", 1)  # 三队列均非显著 -> 蓝色
+    # All three cohorts non-significant -> blue
     s += txt(x1 + 14, cy + 2, f"{c['r']:.3f} ({c['lo']:.2f}, {c['hi']:.2f})", 10, "start")
 
-# 图例与说明
+# Legend and notes
 s += txt(40, y1 + 40, "Blue dots: not statistically significant (all three primary analyses).", 10, fill="#555")
 s += txt(40, y1 + 58, "Effect estimates varied across cohorts; no pooled effect was estimated because the cohorts differ in", 9, fill="#777")
 s += txt(40, y1 + 72, "tumor type, treatment, platform and analysis sample (pre-treatment only unless noted).", 9, fill="#777")

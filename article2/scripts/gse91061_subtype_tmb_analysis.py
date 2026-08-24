@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-GSE91061 (Riaz 2017 Cell) 分子亚型 + TMB + BRAF/NRAS 综合分析
+GSE91061 (Riaz 2017 Cell) Molecular subtype + TMB + BRAF/NRAS combined analysis
 
-数据来源:
-- GSE91061 表达矩阵 (FPKM, Entrez ID)
+Data sources:
+- GSE91061 expression matrix (FPKM, Entrez ID)
 - bms038_clinical_data.csv (Riaz GitHub): SubtypeEZ (BRAF/RAS/NF1/TripleWT), BOR, myBOR, PFS, OS
-- pre_therapy_nonsynonmous_mutations.csv (Riaz GitHub): 突变 → TMB + BRAF/NRAS 状态
-- SampleTableCorrected.9.19.16.csv: 样本映射
+- pre_therapy_nonsynonmous_mutations.csv (Riaz GitHub): mutations → TMB + BRAF/NRAS status
+- SampleTableCorrected.9.19.16.csv: sample mapping
 
-分析:
-1. ZP3 表达按 SubtypeEZ 分层比较
-2. TMB 与 ZP3 相关性
-3. BRAF/NRAS 突变状态与 ZP3
-4. ZP3-反应关系按亚型分层
-5. ZP3-反应关系按高/低 TMB 分层
-6. 多因素 logistic 回归
+Analysis:
+1. ZP3 expression compared by SubtypeEZ strata
+2. Correlation between TMB and ZP3
+3. BRAF/NRAS mutation status and ZP3
+4. ZP3-response relationship stratified by subtype
+5. ZP3-response relationship stratified by high/low TMB
+6. Multivariable logistic regression
 """
 
 import pandas as pd
@@ -35,55 +35,55 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def load_data():
     print("=" * 60)
-    print("GSE91061 分子亚型 + TMB 综合分析")
+    print("GSE91061 molecular subtypes + TMB comprehensive analysis")
     print("=" * 60)
     
-    # 1. 表达数据
-    print("\n[1/6] 加载表达数据...")
+    # 1. Expression data
+    print("\n[1/6] Loading expression data...")
     expr = pd.read_csv(os.path.join(DIR, 'GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv'), index_col=0)
-    zp3_expr = expr.loc[7784]  # ZP3 (2026-08-17 审计修复: 7784, 原误用 8277=SP5)
-    print(f"  表达矩阵: {len(expr)} 基因 × {len(expr.columns)} 样本")
+    zp3_expr = expr.loc[7784]  # ZP3 (2026-08-17 audit fix: 7784, originally mistakenly used 8277=SP5)
+    print(f"  Expression matrix: {len(expr)} genes × {len(expr.columns)} samples")
     
-    # 2. 临床数据
+    # 2. Clinical data
     clin = pd.read_csv(os.path.join(DIR, 'bms038_clinical_data.csv'))
     clin = clin.set_index('PatientID')
-    print(f"  临床数据: {len(clin)} 患者")
+    print(f"  Clinical data: {len(clin)} patients")
     
-    # 3. 突变数据 → TMB
-    print("\n[2/6] 计算 TMB 和 BRAF/NRAS 突变...")
+    # 3. Mutation data → TMB
+    print("\n[2/6] Calculating TMB and BRAF/NRAS mutations...")
     mut = pd.read_csv(os.path.join(DIR, 'pre_therapy_nonsynonmous_mutations.csv'))
-    print(f"  突变总数: {len(mut)}")
+    print(f"  Total mutations: {len(mut)}")
     
-    # 每个患者的非同义突变数 = TMB proxy
+    # Number of nonsynonymous mutations per patient = TMB proxy
     tmb_by_patient = mut.groupby('Patient').size().to_dict()
     
-    # BRAF/NRAS 突变状态
+    # BRAF/NRAS mutation status
     braf_mut = mut[mut['Hugo Symbol'] == 'BRAF'].groupby('Patient')['HGVS_p'].apply(list).to_dict()
     nras_mut = mut[mut['Hugo Symbol'] == 'NRAS'].groupby('Patient')['HGVS_p'].apply(list).to_dict()
     
     braf_patients = set(braf_mut.keys())
     nras_patients = set(nras_mut.keys())
-    print(f"  BRAF 突变患者: {len(braf_patients)}")
-    print(f"  NRAS 突变患者: {len(nras_patients)}")
-    print(f"  TMB 范围: {min(tmb_by_patient.values())} - {max(tmb_by_patient.values())}")
+    print(f"  BRAF mutated patients: {len(braf_patients)}")
+    print(f"  NRAS mutated patients: {len(nras_patients)}")
+    print(f"  TMB range: {min(tmb_by_patient.values())} - {max(tmb_by_patient.values())}")
     
-    # 4. 样本映射
-    print("\n[3/6] 映射样本...")
+    # 4. Sample mapping
+    print("\n[3/6] Mapping samples...")
     sample_table = pd.read_csv(os.path.join(DIR, 'SampleTableCorrected.9.19.16.csv'), index_col=0)
-    # SampleTable index 是 Pt101_Pre, PatientID 列有 Pt101
+    # SampleTable index is Pt101_Pre, PatientID column has Pt101
     sample_to_patient = dict(zip(sample_table.index, sample_table['PatientID']))
     
-    # 只保留 pre-treatment 样本
+    # Keep only pre-treatment samples
     pre_samples = []
     for col in expr.columns:
-        # 提取 Pt101_Pre
+        # Extract Pt101_Pre
         short_name = '_'.join(col.split('_')[:2])
         if short_name in sample_to_patient and short_name.endswith('_Pre'):
             pre_samples.append((col, short_name))
     
-    print(f"  Pre-treatment 样本: {len(pre_samples)}")
+    print(f"  Pre-treatment samples: {len(pre_samples)}")
     
-    # 构建分析数据
+    # Construct analysis data
     rows = []
     for full_name, short_name in pre_samples:
         patient = sample_to_patient.get(short_name)
@@ -96,7 +96,7 @@ def load_data():
             'ZP3_FPKM': zp3_expr[full_name],
         }
         
-        # 临床
+        # Clinical
         c = clin.loc[patient]
         row['SubtypeEZ'] = c.get('SubtypeEZ', np.nan)
         row['BOR'] = c.get('BOR', np.nan)
@@ -115,7 +115,7 @@ def load_data():
         row['BRAF_variant'] = '; '.join(braf_mut.get(patient, []))
         row['NRAS_variant'] = '; '.join(nras_mut.get(patient, []))
         
-        # 反应二分类 (用 myBOR: PRCR=response, PD/SD=non-response)
+        # Response binary classification (using myBOR: PRCR=response, PD/SD=non-response)
         if row['myBOR'] == 'PRCR':
             row['response_binary'] = 1  # Response
         elif row['myBOR'] in ('PD', 'SD'):
@@ -126,16 +126,16 @@ def load_data():
         rows.append(row)
     
     df = pd.DataFrame(rows)
-    print(f"  分析数据: {len(df)} 样本")
-    print(f"  ZP3 范围: {df['ZP3_FPKM'].min():.2f} - {df['ZP3_FPKM'].max():.2f}")
+    print(f"  Analyzing data: {len(df)} samples")
+    print(f"  ZP3 range: {df['ZP3_FPKM'].min():.2f} - {df['ZP3_FPKM'].max():.2f}")
     
     return df, clin
 
 def analyze_subtype_zp3(df):
-    """分析 1: ZP3 表达按 SubtypeEZ"""
-    print("\n[4/6] ZP3 按 SubtypeEZ 分层...")
+    """Analysis 1: ZP3 expression by SubtypeEZ"""
+    print("\n[4/6] Stratifying ZP3 by SubtypeEZ...")
     
-    # 合并 BRAF/NRAS 细分类别
+    # Merge BRAF/NRAS subtype categories
     df = df.copy()
     df['mut_type'] = df.apply(lambda r: 
         'BRAF' if r['BRAF_mut'] else 
@@ -146,9 +146,9 @@ def analyze_subtype_zp3(df):
     
     subtypes = [s for s in ['BRAF', 'NRAS', 'NF1', 'TripleWT'] if s in df['mut_type'].values]
     
-    print(f"  突变类型分布: {df['mut_type'].value_counts().to_dict()}")
+    print(f"  Mutation type distribution: {df['mut_type'].value_counts().to_dict()}")
     
-    # 统计
+    # Statistics
     stats_rows = []
     for st in subtypes:
         vals = df[df['mut_type'] == st]['ZP3_FPKM']
@@ -157,7 +157,7 @@ def analyze_subtype_zp3(df):
             'mean': vals.mean(), 'median': vals.median(), 'std': vals.std()
         })
     
-    # 检验: BRAF vs TripleWT
+    # Test: BRAF vs TripleWT
     if 'BRAF' in subtypes and 'TripleWT' in subtypes:
         u, p = stats.mannwhitneyu(
             df[df['mut_type']=='BRAF']['ZP3_FPKM'],
@@ -168,12 +168,12 @@ def analyze_subtype_zp3(df):
     return df
 
 def analyze_tmb_zp3(df):
-    """分析 2: TMB 与 ZP3 相关"""
-    print("\n[5/6] TMB 与 ZP3 相关分析...")
+    """Analysis 2: TMB correlation with ZP3"""
+    print("\n[5/6] TMB-ZP3 correlation analysis...")
     
     valid = df.dropna(subset=['TMB_nonsyn', 'ZP3_FPKM'])
     if len(valid) < 10:
-        print("  样本不足")
+        print("  Insufficient samples")
         return
     
     r, p = stats.spearmanr(valid['TMB_nonsyn'], valid['ZP3_FPKM'])
@@ -182,22 +182,22 @@ def analyze_tmb_zp3(df):
     r_p, p_p = stats.pearsonr(valid['TMB_nonsyn'], valid['ZP3_FPKM'])
     print(f"  TMB vs ZP3 (Pearson): r={r_p:.3f}, p={p_p:.3f}")
     
-    # 高/低 TMB 分层 ZP3-反应
+    # Stratify ZP3 response by high/low TMB
     median_tmb = valid['TMB_nonsyn'].median()
     df['TMB_group'] = np.where(df['TMB_nonsyn'] > median_tmb, 'High_TMB', 'Low_TMB')
     
     return df
 
 def stratified_response_analysis(df):
-    """分析 3: ZP3-反应关系按亚型/TMB 分层"""
-    print("\n[6/6] 分层分析 ZP3-反应关系...")
+    """Analysis 3: ZP3-response relationship stratified by subtype/TMB"""
+    print("\n[6/6] Stratified analysis of ZP3-response relationship...")
     
     results = {}
     
     valid_resp = df.dropna(subset=['response_binary', 'ZP3_FPKM'])
-    print(f"  有反应数据样本: {len(valid_resp)}")
+    print(f"  Samples with response data: {len(valid_resp)}")
     
-    # 总体
+    # Overall
     resp = valid_resp[valid_resp['response_binary'] == 1]
     nonresp = valid_resp[valid_resp['response_binary'] == 0]
     if len(resp) > 3 and len(nonresp) > 3:
@@ -209,9 +209,9 @@ def stratified_response_analysis(df):
             'nonresp_median': nonresp['ZP3_FPKM'].median(),
             'MWU_p': p, 'pearson_r': r_p, 'pearson_p': p_p
         }
-        print(f"  总体: R(n={len(resp)}) med={resp['ZP3_FPKM'].median():.2f} vs NR(n={len(nonresp)}) med={nonresp['ZP3_FPKM'].median():.2f}, p={p:.4f}")
+        print(f"  Overall: R(n={len(resp)}) med={resp['ZP3_FPKM'].median():.2f} vs NR(n={len(nonresp)}) med={nonresp['ZP3_FPKM'].median():.2f}, p={p:.4f}")
     
-    # 按突变类型分层
+    # Stratified by mutation type
     for st in ['BRAF', 'NRAS', 'TripleWT']:
         sub = valid_resp[valid_resp['mut_type'] == st]
         r_sub = sub[sub['response_binary'] == 1]
@@ -226,7 +226,7 @@ def stratified_response_analysis(df):
             }
             print(f"  {st}: R(n={len(r_sub)}) med={r_sub['ZP3_FPKM'].median():.2f} vs NR(n={len(nr_sub)}) med={nr_sub['ZP3_FPKM'].median():.2f}, p={p:.4f}")
     
-    # 按 TMB 分层
+    # Stratified by TMB
     if 'TMB_group' in df.columns:
         for g in ['High_TMB', 'Low_TMB']:
             sub = valid_resp[valid_resp['TMB_group'] == g]
@@ -245,18 +245,18 @@ def stratified_response_analysis(df):
     return results, valid_resp
 
 def multivariate_logistic(df):
-    """分析 4: 多因素 logistic 回归"""
-    print("\n[额外] 多因素 logistic 回归...")
+    """Analysis 4: Multivariate logistic regression"""
+    print("\n[Extra] Multivariate logistic regression...")
     
     valid = df.dropna(subset=['response_binary', 'ZP3_FPKM', 'TMB_nonsyn'])
     if len(valid) < 15:
-        print("  样本不足")
+        print("  Insufficient samples")
         return None
     
     try:
         import statsmodels.api as sm
         
-        # 特征
+        # Features
         X = pd.DataFrame({
             'ZP3_FPKM': valid['ZP3_FPKM'],
             'TMB_nonsyn': valid['TMB_nonsyn'],
@@ -268,23 +268,23 @@ def multivariate_logistic(df):
         X_const = sm.add_constant(X)
         model = sm.Logit(y, X_const).fit(disp=0)
         
-        print(f"  Logit 模型 (n={len(valid)}):")
+        print(f"  Logit model (n={len(valid)}):")
         for name, coef, p in zip(model.params.index, model.params, model.pvalues):
             print(f"    {name}: coef={coef:.3f}, OR={np.exp(coef):.2f}, p={p:.4f}")
         
         return model
     except Exception as e:
-        print(f"  回归失败: {e}")
+        print(f"  Regression failed: {e}")
         return None
 
 def plot_analysis(df, valid_resp, results, model):
-    """综合可视化"""
-    print("\n生成可视化...")
+    """Comprehensive visualization"""
+    print("\nGenerating visualization...")
     
     fig = plt.figure(figsize=(18, 14))
     gs = gridspec.GridSpec(3, 3, figure=fig, hspace=0.4, wspace=0.3)
     
-    # A: ZP3 按突变类型
+    # A: ZP3 by mutation subtype
     ax1 = fig.add_subplot(gs[0, 0])
     subtypes = ['BRAF', 'NRAS', 'NF1', 'TripleWT']
     present = [s for s in subtypes if s in df['mut_type'].values]
@@ -299,7 +299,7 @@ def plot_analysis(df, valid_resp, results, model):
     ax1.set_ylabel('ZP3 FPKM', fontsize=11)
     ax1.set_title('A. ZP3 by Mutation Subtype', fontsize=12, fontweight='bold')
     
-    # B: ZP3 vs TMB 散点
+    # B: ZP3 vs TMB scatter
     ax2 = fig.add_subplot(gs[0, 1])
     for st in present:
         sub = df[df['mut_type']==st]
@@ -314,7 +314,7 @@ def plot_analysis(df, valid_resp, results, model):
     ax2.set_ylabel('ZP3 FPKM', fontsize=11)
     ax2.legend(fontsize=8)
     
-    # C: ZP3-反应总体
+    # C: ZP3-response overall
     ax3 = fig.add_subplot(gs[0, 2])
     resp = valid_resp[valid_resp['response_binary']==1]
     nonresp = valid_resp[valid_resp['response_binary']==0]
@@ -331,7 +331,7 @@ def plot_analysis(df, valid_resp, results, model):
     else:
         ax3.set_title('C. ZP3 by Response', fontsize=12, fontweight='bold')
     
-    # D: 按突变类型分层 ZP3-反应 (条形图)
+    # D: ZP3-response stratified by mutation type (bar chart)
     ax4 = fig.add_subplot(gs[1, :2])
     strat_keys = [k for k in results if k.endswith('_stratified')]
     strat_labels = [k.replace('_stratified', '') for k in strat_keys]
@@ -349,7 +349,7 @@ def plot_analysis(df, valid_resp, results, model):
     ax4.set_title('D. ZP3-Response Stratified by Subtype/TMB', fontsize=12, fontweight='bold')
     ax4.legend()
     
-    # E: 多因素回归森林图
+    # E: Multivariate regression forest plot
     ax5 = fig.add_subplot(gs[1, 2])
     if model is not None:
         names = ['ZP3', 'TMB', 'BRAF', 'NRAS']
@@ -372,7 +372,7 @@ def plot_analysis(df, valid_resp, results, model):
         ax5.text(0.5, 0.5, 'Model not available\n(sample size too small)', 
                 ha='center', va='center', fontsize=12)
     
-    # F: TMB 分层 ZP3-反应
+    # F: TMB-stratified ZP3-response
     ax6 = fig.add_subplot(gs[2, :])
     ax6.axis('off')
     text_lines = ["Stratified ZP3-Response Analysis Summary", "=" * 55]
@@ -397,12 +397,12 @@ def plot_analysis(df, valid_resp, results, model):
     
     fig_path = os.path.join(OUTPUT_DIR, "fig_gse91061_subtype_tmb_zp3.png")
     fig.savefig(fig_path, dpi=200, bbox_inches="tight")
-    print(f"  图表: {fig_path}")
+    print(f"  Figure: {fig_path}")
     plt.close()
     return fig_path
 
 def save_outputs(df, results, model):
-    """保存结果"""
+    """Save results"""
     df.to_csv(os.path.join(OUTPUT_DIR, "gse91061_subtype_tmb_merged.csv"), index=False)
     
     with open(os.path.join(OUTPUT_DIR, "gse91061_stratified_results.json"), "w") as f:
@@ -417,8 +417,8 @@ def save_outputs(df, results, model):
         })
         summary.to_csv(os.path.join(OUTPUT_DIR, "gse91061_logistic_regression.csv"), index=False)
     
-    print(f"\n✓ 分析完成!")
-    print(f"  产物目录: {OUTPUT_DIR}")
+    print(f"\n✓ Analysis complete!")
+    print(f"  Output directory: {OUTPUT_DIR}")
 
 def main():
     df, clin = load_data()

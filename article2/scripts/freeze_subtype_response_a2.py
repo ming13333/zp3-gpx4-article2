@@ -2,21 +2,21 @@
 # -*- coding: utf-8 -*-
 """
 freeze_subtype_response_a2.py
-冻结 GSE91061 Pre 基线 (n=49) 分子亚型分层 ZP3-反应 Mann-Whitney P 值，
-封堵 Fig5 右面板 "Immune / Keratin" 两柱 (P=0.8001 / 0.7692) 的
-"图上声明但无冻结源" 缺口（与 freeze_standard_logistic_a2.py 同源审查）。
+Freeze GSE91061 Pre baseline (n=49) molecular subtype-stratified ZP3-response Mann-Whitney P values,
+closing the Fig5 right-panel "Immune / Keratin" two-bar (P=0.8001 / 0.7692)
+"claimed on figure but no frozen source" gap (same-source audit as freeze_standard_logistic_a2.py).
 
-复刻 gse91061_molecular_subtype.py::analyze_response 的"按分子亚型分层"口径:
-  - 表达数据: GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv (Entrez ID 行)
-  - ZP3 Entrez = 7784 (2026-08-17 审计修复)
-  - 仅 Pre 基线样本 (visit == 'Pre')
+Replicates the "stratify by molecular subtype" convention of gse91061_molecular_subtype.py::analyze_response:
+  - Expression data: GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv (Entrez ID rows)
+  - ZP3 Entrez = 7784 (2026-08-17 audit fix)
+  - Pre baseline samples only (visit == 'Pre')
   - binary_response: PRCR/PR/CR = Response; SD/PD = Non-response
-  - 分子亚型: Immune / Keratin / MITF-high / MITF-low (按评分中位数阈值, assign_subtypes)
-  - 每个亚型: Mann-Whitney U (ZP3 | Response vs Non-response, two-sided)
-    - 任一组 < 2 样本 -> 不可估计 (not estimable)
+  - Molecular subtypes: Immune / Keratin / MITF-high / MITF-low (thresholded by score median, assign_subtypes)
+  - Per subtype: Mann-Whitney U (ZP3 | Response vs Non-response, two-sided)
+    - Either group < 2 samples -> not estimable
 
-输出: article2/results/a2_gse91061_subtype_response.csv
-列: subtype, n_total, n_response, n_nonresponse, zp3_mean_response,
+Output: article2/results/a2_gse91061_subtype_response.csv
+Columns: subtype, n_total, n_response, n_nonresponse, zp3_mean_response,
     zp3_mean_nonresponse, mwu_p, estimable
 """
 import os, sys
@@ -35,7 +35,7 @@ import gse91061_molecular_subtype as sub  # reuse helpers
 
 
 def load_clinical_aligned():
-    """复刻 main() 数据准备并指派分子亚型。"""
+    """Replicate main() data preparation and assign molecular subtypes."""
     expr = pd.read_csv(os.path.join(DATA_DIR, "GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv"), index_col=0)
 
     sample_titles, gsm_ids, visits, responses = [], [], [], []

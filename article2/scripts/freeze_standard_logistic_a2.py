@@ -2,20 +2,20 @@
 # -*- coding: utf-8 -*-
 """
 freeze_standard_logistic_a2.py
-冻结 GSE91061 Pre 基线 (n=49) 标准 logistic 回归结果，封堵 Fig5 左面板
-"logistic univariable / +IFN-g / +Supp" 三柱 (P=0.4545/0.5154/0.5772) 的
-"图上声明但无冻结源" 缺口。
+Freeze GSE91061 Pre baseline (n=49) standard logistic regression results, closing the Fig5 left panel
+"logistic univariable / +IFN-g / +Supp" three bars (P=0.4545/0.5154/0.5772) of
+"declared on figure but without frozen source" gap.
 
-复刻 gse91061_molecular_subtype.py::multivariate_analysis 的精确口径:
-  - 表达数据: GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv (Entrez ID 行)
-  - ZP3 Entrez = 7784 (2026-08-17 审计修复)
-  - 仅 Pre 基线样本 (visit == 'Pre')
+Replicate the exact specification of gse91061_molecular_subtype.py::multivariate_analysis:
+  - Expression data: GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv (Entrez ID rows)
+  - ZP3 Entrez = 7784 (2026-08-17 audit fix)
+  - Pre baseline samples only (visit == 'Pre')
   - binary_response: PRCR/PR/CR = 1 (Response); SD/PD = 0 (Non-response)
-  - 3 个模型: (1) ZP3 单独; (2) ZP3 + IFN-gamma score; (3) ZP3 + immunosuppression score
-  - 协变量均按列标准化 (z-score)
+  - 3 models: (1) ZP3 alone; (2) ZP3 + IFN-gamma score; (3) ZP3 + immunosuppression score
+  - All covariates were standardized per column (z-score)
 
-输出: article2/results/a2_gse91061_logistic_standard.csv
-列: model, term, n, OR, ci_low, ci_high, p
+Output: article2/results/a2_gse91061_logistic_standard.csv
+Columns: model, term, n, OR, ci_low, ci_high, p
 """
 import os, sys
 import pandas as pd
@@ -32,7 +32,7 @@ import gse91061_molecular_subtype as sub  # reuse get_gene_mapping / compute_imm
 
 
 def load_clinical_aligned():
-    """复刻 main() 的数据准备 (lines 64-137)，返回带 ZP3 + 免疫评分的临床表。"""
+    """Replicate main() data preparation (lines 64-137), returning clinical table with ZP3 + immune scores."""
     expr = pd.read_csv(os.path.join(DATA_DIR, "GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv"), index_col=0)
 
     sample_titles, gsm_ids, visits, responses = [], [], [], []
@@ -124,7 +124,7 @@ def main():
     print(f"GSE91061 Pre baseline n={n}")
     print(out.to_string(index=False))
 
-    # 自检: Fig5 左面板声明值
+    # Self-check: Fig5 left panel declared values
     declared = {"Model1_ZP3_only": 0.4545, "Model2_ZP3_IFNg": 0.5154, "Model3_ZP3_Supp": 0.5772}
     ok = True
     for mname, dp in declared.items():

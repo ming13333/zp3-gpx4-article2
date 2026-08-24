@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-A2 参考文献纯只读审计 (2026-08-19)
+A2 reference read-only audit (2026-08-19)
 ==================================
-目标: 不修改文件, 只输出当前稿件 (v0.7, 正文字段已改但引用区同原 v0.7) 的
-  引用完整性审计 + 每条引用的正文引用位置, 供人工/后续按"替换不匹配条目"决策。
-不重排、不删除。逐条列出:
-  1) 参考文献区每条编号是否存在
-  2) 每条是否被正文引用 (引用位置列表)
-  3) 正文引用编号是否有悬空 (引用无条目)
-  4) 顺序是否连续
+Goal: do not modify the file; only output the current manuscript (v0.7, body text has been changed but the reference section is the same as original v0.7)'s
+  citation integrity audit + the in-text citation location of each reference, for manual/follow-up decision to "replace mismatched entries".
+Do not reorder or delete. List each entry:
+  1) whether each number in the reference section exists
+  2) whether each entry is cited in the body (list of citation locations)
+  3) whether body citation numbers are dangling (citation without an entry)
+  4) whether the order is consecutive
 """
 import re
 
-SRC = r"C:\D\workbuddy\科研\细胞外GPX4免疫抑制\article2\manuscripts\Article2_A2_Cancers格式_v0.7.md"
+SRC = r"C:\D\workbuddy\research\extracellularGPX4immunosuppression\article2\manuscripts\Article2_A2_Cancersformat_v0.7.md"
 with open(SRC, encoding="utf-8") as f:
     text = f.read()
 
@@ -21,7 +21,7 @@ ridx = text.find(marker)
 body = text[:ridx]
 refs = text[ridx:]
 
-# ---- 1. 解析参考文献区条目编号 ----
+# ---- 1. Parse reference section entry numbers ----
 ref_nums, ref_lines = [], {}
 for ln in refs.split("\n"):
     m = re.match(r"^(\d{2})\.\s", ln.strip())
@@ -30,7 +30,7 @@ for ln in refs.split("\n"):
         ref_nums.append(n)
         ref_lines[n] = ln.strip()
 
-# ---- 2. 扫描正文中所有引用 token, 记录每个编号出现位置(所在行) ----
+# ---- 2. Scan all citation tokens in the body, record the occurrence position (line) of each number ----
 occur = {}   # n -> list of lines
 for i, line in enumerate(body.split("\n"), 1):
     for m in re.finditer(r"\[([0-9,\-\s]+)\]", line):
@@ -45,29 +45,29 @@ for i, line in enumerate(body.split("\n"), 1):
                     occur.setdefault(n, []).append(i)
 
 cited = set(occur)
-# ---- 3. 审计 ----
+# ---- 3. Audit ----
 print("=" * 70)
-print("参考文献区编号 (应连续 1..33):")
+print("Reference list numbering (should be consecutive 1..33):")
 print(sorted(ref_nums))
 seq_ok = ref_nums == list(range(34))
-print(f"连续 1..33: {seq_ok}")
+print(f"Consecutive 1..33: {seq_ok}")
 print()
 print("=" * 70)
-print("悬空引用 (正文引用但参考文献区无此条目):")
+print("Dangling references (cited in text but missing from reference list):")
 dangling = sorted(cited - set(ref_nums))
-print(sorted(cited - set(ref_nums)) if dangling else "  无")
+print(sorted(cited - set(ref_nums)) if dangling else "  none")
 print()
-print("孤儿条目 (参考文献区有条目但正文从未引用):")
+print("Orphan entries (in reference list but never cited in text):")
 orphan = sorted(set(ref_nums) - cited)
-print(sorted(orphan) if orphan else "  无")
+print(sorted(orphan) if orphan else "  none")
 print()
 print("=" * 70)
-print("每条引用在正文的引用次数 (行号):")
+print("Occurrences of each reference in text (line numbers):")
 for n in range(1, 34):
     occ = occur.get(n, [])
-    status = "CITED" if n in cited else "ORPHAN(未引用)"
+    status = "CITED" if n in cited else "ORPHAN(not cited)"
     keep = "KEEP" if n not in (22, 23) else "?MISMATCH"
     flag = ""
-    if n == 22: flag = "  <== 肾癌ECM, 疑不匹配'预后意义'"
-    if n == 23: flag = "  <== 脑静脉血栓, 疑不匹配'预后意义'"
-    print(f"  [{n:2d}] {status:16s} 引用{len(occ)}处  {flag}")
+    if n == 22: flag = "  <== renal cancer ECM, suspected mismatch with 'prognostic significance'"
+    if n == 23: flag = "  <== cerebral venous thrombosis, suspected mismatch with 'prognostic significance'"
+    print(f"  [{n:2d}] {status:16s} cited at {len(occ)} places  {flag}")

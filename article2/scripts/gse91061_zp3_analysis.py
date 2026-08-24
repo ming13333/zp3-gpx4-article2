@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-GSE91061 黑色素瘤抗 PD-1 治疗队列 ZP3 分析
-验证 ZP3 与免疫治疗反应的关系
+GSE91061 Melanoma anti-PD-1 treatment cohort ZP3 analysis
+Validate the relationship between ZP3 and immunotherapy response
 """
 
 import pandas as pd
@@ -14,7 +14,7 @@ import warnings
 import re
 warnings.filterwarnings('ignore')
 
-# 设置绘图风格
+# Set plotting style
 plt.style.use('default')
 plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['font.size'] = 10
@@ -22,7 +22,7 @@ plt.rcParams['axes.titlesize'] = 12
 plt.rcParams['axes.labelsize'] = 10
 
 def parse_series_matrix(matrix_file):
-    """解析 Series Matrix 文件提取临床信息"""
+    """Parse Series Matrix file to extract clinical information"""
     sample_ids = []
     visits = []
     responses = []
@@ -31,24 +31,24 @@ def parse_series_matrix(matrix_file):
     with open(matrix_file, 'r', encoding='utf-8') as f:
         for line in f:
             if line.startswith('!Series_sample_id'):
-                # 提取样本ID
+                # Extract sample IDs
                 parts = line.strip().split('\t')
                 if len(parts) > 1:
                     sample_ids = parts[1].strip('"').split()
             elif line.startswith('!Sample_characteristics_ch1'):
                 parts = line.strip().split('\t')
                 if len(parts) > 1:
-                    # 提取 visit 信息（第一行 ch1）
+                    # Extract visit information (first ch1 row)
                     if not visits:
                         visits = [p.split(': ')[-1].strip('"') for p in parts[1:] if 'visit' in p.lower()]
-                    # 提取 response 信息（第二行 ch1）
+                    # Extract response information (second ch1 row)
                     elif not responses:
                         responses = [p.split(': ')[-1].strip('"') for p in parts[1:] if 'response' in p.lower()]
-                    # 提取 tissue 信息（第三行 ch1）
+                    # Extract tissue information (third ch1 row)
                     elif not tissues:
                         tissues = [p.split(': ')[-1].strip('"') for p in parts[1:] if 'tissue' in p.lower()]
     
-    # 创建临床数据 DataFrame
+    # Create clinical data DataFrame
     if sample_ids and responses:
         clinical = pd.DataFrame({
             'sample_id': sample_ids,
@@ -61,17 +61,17 @@ def parse_series_matrix(matrix_file):
         return None
 
 def create_sample_mapping(expr_columns):
-    """创建表达矩阵列名到 GSM 样本名的映射"""
-    # 表达矩阵列名格式: Pt1_Pre_AD101148-6
-    # 临床数据样本名格式: GSM2420259
-    # 需要从 Series Matrix 文件中提取映射关系
+    """Create mapping from expression matrix column names to GSM sample names"""
+    # Expression matrix column name format: Pt1_Pre_AD101148-6
+    # Clinical data sample name format: GSM2420259
+    # Need to extract the mapping from the Series Matrix file
     
-    # 读取 Series Matrix 文件获取 GSM 到患者信息的映射
+    # Read the Series Matrix file to obtain the mapping from GSM to patient information
     mapping = {}
     with open(os.path.join(G9DIR, 'GSE91061_series_matrix.txt'), 'r', encoding='utf-8') as f:
         lines = f.readlines()
         
-    # 找到 Sample_title 行（包含 GSM ID 和样本描述）
+    # Find the Sample_title line (contains GSM ID and sample description)
     sample_titles = []
     for line in lines:
         if line.startswith('!Sample_title'):
@@ -80,87 +80,87 @@ def create_sample_mapping(expr_columns):
                 sample_titles = parts[1:]
             break
     
-    # 找到 Sample_geo_accession 行（GSM ID）
+    # Find the Sample_geo_accession line (GSM ID)
     gsm_ids = []
     for line in lines:
         if line.startswith('!Sample_geo_accession'):
             parts = line.strip().split('\t')
             if len(parts) > 1:
-                gsm_ids = [g.strip('"') for g in parts[1:]]  # 去除每个 GSM 的引号
+                gsm_ids = [g.strip('"') for g in parts[1:]]  # Remove quotes from each GSM
             break
     
-    # 创建 GSM 到样本描述的映射
+    # Create mapping from GSM to sample description
     gsm_to_desc = {}
     for i, gsm in enumerate(gsm_ids):
         if i < len(sample_titles):
             desc = sample_titles[i].strip('"')
             gsm_to_desc[gsm] = desc
     
-    # 创建样本描述到 GSM 的映射
+    # Create mapping from sample description to GSM
     desc_to_gsm = {desc: gsm for gsm, desc in gsm_to_desc.items()}
     
-    # 从样本描述中提取患者ID和visit类型
-    # 格式示例: "Pt1_Pre_AD101148-6"
+    # Extract patient ID and visit type from sample description
+    # Format example: "Pt1_Pre_AD101148-6"
     expr_to_gsm = {}
     for expr_sample in expr_columns:
-        # 直接使用表达矩阵列名作为样本描述
+        # Directly use expression matrix column names as sample description
         if expr_sample in desc_to_gsm:
             expr_to_gsm[expr_sample] = desc_to_gsm[expr_sample]
     
     return expr_to_gsm
 
 def main():
-    print("=== GSE91061 黑色素瘤抗 PD-1 治疗队列 ZP3 分析 ===\n")
+    print("=== GSE91061 melanoma anti-PD-1 treatment cohort ZP3 analysis ===\n")
     
-    # 1. 加载临床数据
-    print("1. 加载临床数据...")
+    # 1. Load clinical data
+    print("1. Loading clinical data...")
     clinical = parse_series_matrix('GSE91061_series_matrix.txt')
     if clinical is None:
-        print("错误：无法解析临床数据")
+        print("Error: Unable to parse clinical data")
         return
     
-    print(f"  总样本数: {len(clinical)}")
-    print(f"  访问类型分布:")
+    print(f"  Total samples: {len(clinical)}")
+    print(f"  Visit type distribution:")
     print(clinical['visit'].value_counts())
-    print(f"\n  治疗反应分布:")
+    print(f"\n  Treatment response distribution:")
     print(clinical['response'].value_counts())
     
-    # 2. 加载表达数据
-    print("\n2. 加载表达数据...")
+    # 2. Load expression data
+    print("\n2. Loading expression data...")
     G9DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'output', 'gse91061_validation')
     expr = pd.read_csv(os.path.join(G9DIR, 'GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv'), index_col=0)
-    print(f"  基因数: {len(expr)}")
-    print(f"  样本数: {len(expr.columns)}")
+    print(f"  Gene count: {len(expr)}")
+    print(f"  Sample count: {len(expr.columns)}")
     
-    # 3. 检查 ZP3 基因
-    # 注意：表达矩阵使用 Entrez Gene ID，需要将 ZP3 转换为数字 ID
-    # ZP3 的 Entrez Gene ID 是 7784（2026-08-17 审计修复；本脚本已由 v2 取代，仅保留作历史）
+    # 3. Check ZP3 gene
+    # Note: expression matrix uses Entrez Gene IDs; need to convert ZP3 to numeric ID
+    # ZP3's Entrez Gene ID is 7784 (2026-08-17 audit fix; this script has been superseded by v2, kept only for historical purposes)
     zp3_entrez = 7784
     if zp3_entrez in expr.index:
-        print(f"\n3. ZP3 基因 (Entrez ID: {zp3_entrez}) 已找到")
+        print(f"\n3. ZP3 gene (Entrez ID: {zp3_entrez}) found")
         zp3_expr = expr.loc[zp3_entrez]
     else:
-        print(f"\n3. ZP3 基因 (Entrez ID: {zp3_entrez}) 未找到")
-        print("  尝试寻找其他 ZP3 相关基因...")
-        # 查找可能的 ZP3 相关基因
+        print(f"\n3. ZP3 gene (Entrez ID: {zp3_entrez}) not found")
+        print("  Trying to find other ZP3-related genes...")
+        # Find possible ZP3-related genes
         zp3_genes = [idx for idx in expr.index if 'ZP3' in str(idx)]
         if zp3_genes:
-            print(f"  找到 {len(zp3_genes)} 个 ZP3 相关基因: {zp3_genes[:5]}")
+            print(f"  Found {len(zp3_genes)} ZP3-related genes: {zp3_genes[:5]}")
         else:
-            print("  未找到任何 ZP3 相关基因")
+            print("  No ZP3-related genes found")
             return
     
-    # 4. 对齐样本
-    print("\n4. 对齐样本...")
+    # 4. Align samples
+    print("\n4. Aligning samples...")
     
-    # 创建映射
+    # Create mapping
     sample_mapping = create_sample_mapping(expr.columns)
-    print(f"  成功映射的样本数: {len(sample_mapping)}")
+    print(f"  Number of successfully mapped samples: {len(sample_mapping)}")
     
     if len(sample_mapping) < 30:
-        print("  警告：成功映射的样本数太少，分析可能不可靠")
+        print("  Warning: too few successfully mapped samples, analysis may be unreliable")
     
-    # 重新组织临床数据以匹配表达矩阵
+    # Reorganize clinical data to match expression matrix
     mapped_clinical = []
     for expr_sample, gsm in sample_mapping.items():
         if gsm in clinical['sample_id'].values:
@@ -177,12 +177,12 @@ def main():
     zp3_aligned = zp3_expr[clinical_aligned.index]
     
     common_samples = clinical_aligned.index.tolist()
-    print(f"  最终共同样本数: {len(common_samples)}")
+    print(f"  Final common sample count: {len(common_samples)}")
     
-    # 5. 分析治疗反应
-    print("\n5. 分析 ZP3 与治疗反应的关系...")
+    # 5. Analyze treatment response
+    print("\n5. Analyze the relationship between ZP3 and treatment response...")
     
-    # 只分析有明确反应的样本
+    # Only analyze samples with clear response
     response_map = {
         'PRCR': 'Response',  # Partial Response / Complete Response
         'PR': 'Response',
@@ -194,21 +194,21 @@ def main():
     
     clinical_aligned['binary_response'] = clinical_aligned['response'].map(response_map)
     
-    # 过滤未知反应
+    # Filter out unknown responses
     valid_samples = clinical_aligned[clinical_aligned['binary_response'].isin(['Response', 'Non-response'])]
-    print(f"  有明确反应的样本数: {len(valid_samples)}")
+    print(f"  Number of samples with clear response: {len(valid_samples)}")
     
     if len(valid_samples) < 20:
-        print("  警告：有效样本数太少")
+        print("  Warning: too few valid samples")
         return
     
-    # 6. 统计检验
-    print("\n6. 统计检验...")
+    # 6. Statistical test
+    print("\n6. Statistical test...")
     
-    # 按反应分组
+    # Group by response
     response_groups = valid_samples.groupby('binary_response')
     
-    # 计算每组 ZP3 表达
+    # Calculate ZP3 expression for each group
     group_stats = {}
     for group_name, group in response_groups:
         samples = group.index.tolist()
@@ -222,42 +222,42 @@ def main():
                 'values': zp3_values
             }
     
-    # 输出组统计
-    print("\n  ZP3 表达统计:")
+    # Output group statistics
+    print("\n  ZP3 expression statistics:")
     for group_name, stats_dict in group_stats.items():
         print(f"    {group_name}: n={stats_dict['n']}, "
               f"mean={stats_dict['mean']:.3f}, "
               f"median={stats_dict['median']:.3f}, "
               f"std={stats_dict['std']:.3f}")
     
-    # Mann-Whitney U 检验
-    # 初始化，避免后续 'r'/'p_value' 未定义（修正旧版 'if r in locals() else 0' 掩盖错误）
+    # Mann-Whitney U test
+    # Initialize to avoid subsequent 'r'/'p_value' being undefined (fixes old version where 'if r in locals() else 0' masked errors)
     r, p_value = 0.0, 1.0
     if 'Response' in group_stats and 'Non-response' in group_stats:
         response_values = group_stats['Response']['values']
         non_response_values = group_stats['Non-response']['values']
 
-        # Mann-Whitney U 检验
+        # Mann-Whitney U test
         u_stat, p_value = stats.mannwhitneyu(
             response_values, non_response_values, alternative='two-sided'
         )
 
-        # 计算效应量 (rank-biserial r = 1 - 2U/(n1*n2)) —— 标准 Mann-Whitney 效应量
+        # Calculate effect size (rank-biserial r = 1 - 2U/(n1*n2)) — standard Mann-Whitney effect size
         n1, n2 = len(response_values), len(non_response_values)
         r = 1 - (2 * u_stat) / (n1 * n2)
 
-        print(f"\n  Mann-Whitney U 检验:")
-        print(f"    U 统计量: {u_stat:.1f}")
-        print(f"    p 值: {p_value:.4f}")
-        print(f"    效应量 (rank-biserial r): {r:.3f}")
+        print(f"\n  Mann-Whitney U test:")
+        print(f"    U statistic: {u_stat:.1f}")
+        print(f"    p value: {p_value:.4f}")
+        print(f"    Effect size (rank-biserial r): {r:.3f}")
 
         if p_value < 0.05:
-            print(f"    结论: ZP3 表达与治疗反应显著相关 (p < 0.05)")
+            print(f"    Conclusion: ZP3 expression is significantly associated with treatment response (p < 0.05)")
         else:
-            print(f"    结论: ZP3 表达与治疗反应无显著关联 (p >= 0.05)")
+            print(f"    Conclusion: ZP3 expression is not significantly associated with treatment response (p >= 0.05)")
     
-    # 7. 按访问类型分析（治疗前后）
-    print("\n7. 按访问类型分析（治疗前后）...")
+    # 7. Analysis by visit type (before/after treatment)
+    print("\n7. Analysis by visit type (before/after treatment)...")
     
     visit_stats = {}
     for visit_type in ['Pre', 'On']:
@@ -278,9 +278,9 @@ def main():
               f"median={stats_dict['median']:.3f}, "
               f"std={stats_dict['std']:.3f}")
     
-    # 配对检验（同一患者的治疗前后）
-    # 稳健提取患者号：去掉末尾的访问/批次后缀（pre/on/baseline/post 或数字），
-    # 避免旧版 split('_')[0] 在含多下划线 ID（如 TCGA-AB-1234-01）上误截。
+    # Paired test (before/after treatment for the same patient)
+    # Robustly extract patient ID: remove trailing visit/batch suffix (pre/on/baseline/post or digits),
+    # Avoid the old split('_')[0] incorrectly truncating IDs with multiple underscores (e.g., TCGA-AB-1234-01).
     def _patient_token(sid):
         s = str(sid)
         m = re.match(r'^(.*?)[._-]?(?:pre|on|baseline|post|Pre|On|Baseline|Post|\d{1,3})$', s)
@@ -303,21 +303,21 @@ def main():
     
     if paired_data:
         paired_df = pd.DataFrame(paired_data)
-        # Wilcoxon 符号秩检验
+        # Wilcoxon signed-rank test
         stat, p_value = stats.wilcoxon(paired_df['pre'], paired_df['on'])
-        print(f"\n  配对检验 (治疗前后):")
-        print(f"    配对样本数: {len(paired_df)}")
-        print(f"    Wilcoxon 符号秩检验 p 值: {p_value:.4f}")
-        print(f"    治疗前 ZP3 均值: {paired_df['pre'].mean():.3f}")
-        print(f"    治疗后 ZP3 均值: {paired_df['on'].mean():.3f}")
+        print(f"\n  Paired test (before/after treatment):")
+        print(f"    Number of paired samples: {len(paired_df)}")
+        print(f"    Wilcoxon signed-rank test p value: {p_value:.4f}")
+        print(f"    Pre-treatment ZP3 mean: {paired_df['pre'].mean():.3f}")
+        print(f"    Post-treatment ZP3 mean: {paired_df['on'].mean():.3f}")
     
-    # 8. 可视化
-    print("\n8. 生成可视化...")
+    # 8. Visualization
+    print("\n8. Generating visualizations...")
     
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
     fig.suptitle('GSE91061 Melanoma Anti-PD-1: ZP3 Expression Analysis', fontsize=14, fontweight='bold')
     
-    # 8.1 治疗反应分组箱线图
+    # 8.1 Boxplot by treatment response group
     ax1 = axes[0, 0]
     data_for_plot = []
     labels_for_plot = []
@@ -334,7 +334,7 @@ def main():
             patch.set_facecolor(color)
             patch.set_alpha(0.7)
         
-        # 添加个体数据点
+        # Add individual data points
         for i, data in enumerate(data_for_plot):
             x = np.random.default_rng(0).normal(i+1, 0.04, size=len(data))
             ax1.scatter(x, data, alpha=0.4, s=15, color='black')
@@ -343,13 +343,13 @@ def main():
         ax1.set_title('ZP3 by Treatment Response')
         ax1.grid(True, alpha=0.3)
         
-        # 添加 p 值
+        # Add p-value
         if 'Response' in group_stats and 'Non-response' in group_stats:
             ax1.text(0.5, 0.95, f'p = {p_value:.3f}', 
                     transform=ax1.transAxes, ha='center', va='top',
                     bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
     
-    # 8.2 访问类型分组箱线图
+    # 8.2 Boxplot by visit type group
     ax2 = axes[0, 1]
     data_for_plot2 = []
     labels_for_plot2 = []
@@ -366,7 +366,7 @@ def main():
             patch.set_facecolor(color)
             patch.set_alpha(0.7)
         
-        # 添加个体数据点
+        # Add individual data points
         for i, data in enumerate(data_for_plot2):
             x = np.random.default_rng(0).normal(i+1, 0.04, size=len(data))
             ax2.scatter(x, data, alpha=0.4, s=15, color='black')
@@ -375,14 +375,14 @@ def main():
         ax2.set_title('ZP3 by Visit Type (Pre vs On-treatment)')
         ax2.grid(True, alpha=0.3)
     
-    # 8.3 配对数据散点图
+    # 8.3 Paired data scatter plot
     ax3 = axes[1, 0]
     if paired_data:
         for idx, row in paired_df.iterrows():
             ax3.plot([0, 1], [row['pre'], row['on']], 
                     marker='o', markersize=4, alpha=0.3, color='gray')
         
-        # 添加均值线
+        # Add mean line
         ax3.plot([0, 1], [paired_df['pre'].mean(), paired_df['on'].mean()], 
                 marker='o', markersize=8, linewidth=2, color='red', label='Mean')
         
@@ -393,7 +393,7 @@ def main():
         ax3.legend()
         ax3.grid(True, alpha=0.3)
     
-    # 8.4 效应量（本队列 GSE91061，诚实展示；跨队列对比应由各队列自身分析输出汇总）
+    # 8.4 Effect size (this cohort GSE91061, presented honestly; cross-cohort comparison should be summarized from each cohort's own analysis output)
     ax4 = axes[1, 1]
     cohorts = ['GSE91061\n(Melanoma, anti-PD-1)']
     effect_sizes = [r]
@@ -410,15 +410,15 @@ def main():
 
     plt.tight_layout()
 
-    # 保存图表
+    # Save figure
     output_path = 'fig_gse91061_zp3_analysis.png'
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    print(f"  图表已保存至: {output_path}")
+    print(f"  Figure saved to: {output_path}")
 
-    # 9. 保存结果
-    print("\n9. 保存结果...")
+    # 9. Save results
+    print("\n9. Save results...")
 
-    # 创建结果摘要
+    # Create results summary
     results_summary = {
         'Cohort': 'GSE91061',
         'Tissue': 'Melanoma',
@@ -436,23 +436,23 @@ def main():
                       else 'ZP3 expression shows no significant association with anti-PD-1 response in melanoma')
     }
     
-    # 保存为 CSV
+    # Save as CSV
     results_df = pd.DataFrame([results_summary])
     results_df.to_csv(os.path.join(G9DIR, 'gse91061_zp3_results.csv'), index=False)
-    print("  结果摘要已保存至: gse91061_zp3_results.csv")
+    print("  Results summary saved to: gse91061_zp3_results.csv")
     
-    print("\n=== 分析完成 ===")
+    print("\n=== Analysis complete ===")
     _nr_mean = group_stats.get('Non-response', {}).get('mean', 0)
     _r_mean = group_stats.get('Response', {}).get('mean', 0)
-    _direction = ("高 ZP3 表达与较差治疗反应（非应答）相关"
+    _direction = ("High ZP3 expression is associated with poorer treatment response (non-response)"
                   if _nr_mean > _r_mean
-                  else "高 ZP3 表达与较好治疗反应（应答）相关")
-    _effect_label = "中等" if abs(r) >= 0.3 else ("小" if abs(r) >= 0.1 else "极小")
-    _sig_label = "显著相关" if p_value < 0.05 else "无显著关联"
-    print(f"结论: ZP3 在黑色素瘤抗 PD-1 治疗中与治疗反应{_sig_label} (Mann-Whitney U, p={p_value:.4f})")
-    print(f"方向: {_direction}（应答组均值 {_r_mean:.3f} vs 非应答组 {_nr_mean:.3f}）")
-    print(f"效应量: rank-biserial r = {r:.3f}（{_effect_label}效应）")
-    print(f"p 值: {p_value:.4f}（{'显著' if p_value < 0.05 else '不显著'}）")
+                  else "High ZP3 expression is associated with better treatment response (response)")
+    _effect_label = "medium" if abs(r) >= 0.3 else ("small" if abs(r) >= 0.1 else "very small")
+    _sig_label = "significant association" if p_value < 0.05 else "no significant association"
+    print(f"Conclusion: ZP3 shows {_sig_label} with treatment response to anti-PD-1 in melanoma (Mann-Whitney U, p={p_value:.4f})")
+    print(f"Direction: {_direction} (responder mean {_r_mean:.3f} vs non-responder {_nr_mean:.3f})")
+    print(f"Effect size: rank-biserial r = {r:.3f} ({_effect_label} effect)")
+    print(f"p value: {p_value:.4f} ({'significant' if p_value < 0.05 else 'not significant'})")
 
 if __name__ == "__main__":
     main()

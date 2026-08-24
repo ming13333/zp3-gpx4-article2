@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-A2 参考文献重编号脚本 (2026-08-19)
+A2 reference renumbering script (2026-08-19)
 ==================================
-背景: v0.7 中 Ref 22 (Ahluwalia 肾癌ECM) 与 Ref 23 (Song 脑静脉血栓)
-与"ZP3 在肝癌/胰腺癌的预后意义"主张无关 (真正的支撑是 Ref 20=Bi HCC, 21=Lyu 胰腺)。
-做法:
-  1. 将引言句 "...prognostic significance in hepatocellular and pancreatic cancer [22,23]"
-     改为引用 [20,21] (两者支持该主张, 属重复引用, 合法)。
-  2. 删除 Ref 22, 23 (变为孤引用)。
-  3. 全篇把编号 24-33 重排为 22-31 (映射见下)。
-  4. 双向校验: 每个正文 [n] 均有对应参考文献条目, 且 1..31 连续、无遗漏、无孤儿。
-输出: article2/manuscripts/Article2_A2_Cancers格式_v0.8.md
+Background: In v0.7, Ref 22 (Ahluwalia renal cancer ECM) and Ref 23 (Song cerebral venous thrombosis)
+Unrelated to the claim of "prognostic significance of ZP3 in liver cancer/pancreatic cancer" (the real support is Ref 20=Bi HCC, 21=Lyu pancreatic).
+Approach:
+  1. Change the introduction sentence "...prognostic significance in hepatocellular and pancreatic cancer [22,23]"
+     to cite [20,21] (both support the claim; duplicate citations are legitimate).
+  2. Delete Ref 22, 23 (they become orphan citations).
+  3. Renumber 24-33 throughout to 22-31 (mapping below).
+  4. Bidirectional validation: every in-text [n] has a corresponding reference entry, and 1..31 are consecutive, with no omissions or orphans.
+Output: article2/manuscripts/Article2_A2_CancersFormat_v0.8.md
 """
 import re
 import sys
 
-SRC = r"C:\D\workbuddy\科研\细胞外GPX4免疫抑制\article2\manuscripts\Article2_A2_Cancers格式_v0.7.md"
-DST = r"C:\D\workbuddy\科研\细胞外GPX4免疫抑制\article2\manuscripts\Article2_A2_Cancers格式_v0.8.md"
+SRC = r"C:\D\workbuddy\research\extracellular_GPX4_immunosuppression\article2\manuscripts\Article2_A2_CancersFormat_v0.7.md"
+DST = r"C:\D\workbuddy\research\extracellular_GPX4_immunosuppression\article2\manuscripts\Article2_A2_CancersFormat_v0.8.md"
 
-# 重编号映射 (旧 -> 新); 22,23 被删除
+# Renumbering mapping (old -> new); 22,23 are deleted
 MAP = {i: i for i in range(1, 22)}          # 1-21 -> 1-21
 MAP.update({24: 22, 25: 23, 26: 24, 27: 25,
             28: 26, 29: 27, 30: 28, 31: 29,
@@ -27,14 +27,14 @@ MAP.update({24: 22, 25: 23, 26: 24, 27: 25,
 with open(SRC, encoding="utf-8") as f:
     text = f.read()
 
-# ---------- 1. 先把 [22,23] 那句改为 [20,21] ----------
+# ---------- 1. First change the [22,23] sentence to [20,21] ----------
 old_sentence = "carries prognostic significance in hepatocellular and pancreatic cancer [22,23]"
 new_sentence = "carries prognostic significance in hepatocellular and pancreatic cancer [20,21]"
 assert old_sentence in text, "intro sentence not found"
 text = text.replace(old_sentence, new_sentence)
 
-# ---------- 2. 处理正文中的引用编号 ----------
-# 正文 = References 标题之前的部分
+# ---------- 2. Process citation numbers in the body ----------
+# body = part before the References heading
 marker = "## References"
 ref_idx = text.find(marker)
 assert ref_idx != -1, "References section marker not found"
@@ -62,13 +62,13 @@ def replace_citation(m):
     return "[" + ",".join(new_parts) + "]"
 
 new_body = re.sub(r"\[\d+(?:\s*,\s*\d+)*\]", replace_citation, body)
-# 处理含区间的 [a-b] 一并纳入上面的正则会漏 (上面 pattern 不含 '-').
-# 故对仍含 '-' 的区间单独处理:
+# Handling ranges [a-b] together would be missed by the above regex (the above pattern doesn't contain '-').
+# Therefore handle ranges still containing '-' separately:
 def replace_range(m):
     return "[" + ",".join(str(MAP[int(n)]) for n in m.group(1).split("-")) + "]"
 new_body = re.sub(r"\[(\d+-\d+)\]", replace_range, new_body)
 
-# ---------- 3. 删除 Ref 22,23 条目并重排 References 标签 ----------
+# ---------- 3. Delete Ref 22,23 entries and renumber References labels ----------
 ref_lines = refs.split("\n")
 kept = []
 for ln in ref_lines:
@@ -76,13 +76,13 @@ for ln in ref_lines:
     if m:
         num = int(m.group(1))
         if num in (22, 23):
-            continue  # 删除
+            continue  # delete
         kept.append((num, ln))
     else:
-        # 非条目行 (如标题、空行) 原样保留, 但需去重标题行
+        # Non-entry lines (e.g. headings, blank lines) are kept as-is, but heading lines need deduplication
         kept.append((None, ln))
 
-# 重建 References: 按顺序重排编号标签
+# Rebuild References: renumber labels in order
 out_lines = []
 pending_num = 1
 for orig_num, ln in kept:
@@ -95,8 +95,8 @@ for orig_num, ln in kept:
 
 new_refs = "\n".join(out_lines)
 
-# ---------- 4. 校验双向一致性 ----------
-# 提取正文所有引用编号
+# ---------- 4. Verify bidirectional consistency ----------
+# Extract all citation numbers from the body
 body_nums = set()
 for m in re.finditer(r"\[(\d+(?:-\d+)?(?:\s*,\s*\d+(?:-\d+)?)*)\]", new_body):
     inner = m.group(1)
@@ -107,31 +107,31 @@ for m in re.finditer(r"\[(\d+(?:-\d+)?(?:\s*,\s*\d+(?:-\d+)?)*)\]", new_body):
             body_nums.update(range(int(lo), int(hi) + 1))
         elif re.fullmatch(r"\d+", tok):
             body_nums.add(int(tok))
-# 提取参考文献条目编号
+# Extract reference entry numbers
 ref_nums = set()
 for ln in new_refs.split("\n"):
     m = re.match(r"^(\d{2})\.\s", ln)
     if m:
         ref_nums.add(int(m.group(1)))
-# 正文开头的标题/摘要区也含引用, 一并纳入 body_nums
+# The title/abstract section at the beginning of the body also contains citations; include them in body_nums
 all_body = new_body
-# 摘要区在 Simple Summary / Abstract, 已在 new_body 内。
+# The abstract section is in Simple Summary / Abstract, already inside new_body.
 
-missing_refs = sorted(ref_nums - body_nums)   # 有条目但正文未引用 = 孤儿
-missing_body = sorted(body_nums - ref_nums)   # 正文引用但无条目 = 悬空
+missing_refs = sorted(ref_nums - body_nums)   # has entry but not cited in body = orphan
+missing_body = sorted(body_nums - ref_nums)   # cited in body but no entry = dangling
 expected = set(range(1, 32))
 
-print(f"正文引用编号集合: {sorted(body_nums)}")
-print(f"参考文献编号集合: {sorted(ref_nums)}")
-print(f"孤儿引用(条目存在未引用): {missing_refs}")
-print(f"悬空引用(引用无条目): {missing_body}")
-print(f"编号 1..31 完整: {body_nums == expected == ref_nums}")
+print(f"Body citation number set: {sorted(body_nums)}")
+print(f"Reference number set: {sorted(ref_nums)}")
+print(f"Orphan citations (entries exist but not cited): {missing_refs}")
+print(f"Dangling citations (cited but no entry): {missing_body}")
+print(f"Numbers 1..31 complete: {body_nums == expected == ref_nums}")
 
 if missing_refs or missing_body or body_nums != expected or ref_nums != expected:
-    print("!! 校验失败, 不写出 v0.8")
+    print("!! Validation failed, not writing v0.8")
     sys.exit(1)
 
 with open(DST, "w", encoding="utf-8") as f:
     f.write(new_body + "\n" + new_refs)
-print(f"OK -> 已写出 {DST}")
-print(f"正文长度: {len(new_body)}, 引用区长度: {len(new_refs)}")
+print(f"OK -> wrote {DST}")
+print(f"Body length: {len(new_body)}, reference section length: {len(new_refs)}")

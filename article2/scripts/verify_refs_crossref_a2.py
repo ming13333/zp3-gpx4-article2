@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""A2 参考文献 CrossRef 程序化核验：逐条查询 DOI，比对标题/年份，报告错配。"""
+"""A2 references CrossRef programmatic verification: query each DOI, compare title/year, report mismatches."""
 import re, json, sys, urllib.request, urllib.error, time
 
-SRC = r"C:\D\workbuddy\科研\细胞外GPX4免疫抑制\article2\manuscripts\Article2_A2_Cancers格式_v0.7.md"
-OUT = r"C:\D\workbuddy\科研\细胞外GPX4免疫抑制\article2\results\ref_crossref_verify_a2.csv"
+SRC = r"C:\D\workbuddy\research\extracellular_GPX4_immunosuppression\article2\manuscripts\Article2_A2_Cancers_format_v0.7.md"
+OUT = r"C:\D\workbuddy\research\extracellular_GPX4_immunosuppression\article2\results\ref_crossref_verify_a2.csv"
 
 def norm(s):
     s = (s or "").lower()
@@ -13,13 +13,13 @@ def norm(s):
 
 def extract_refs(text):
     refs = []
-    # 匹配 "NN. ... https://doi.org/xxx"
+    # Match "NN. ... https://doi.org/xxx"
     pat = re.compile(r"^(\d{2})\.\s+(.*?)\s+(https?://(?:dx\.)?doi\.org/[^\s]+)\s*$", re.M)
     for m in pat.finditer(text):
         num = int(m.group(1))
         body = m.group(2)
         doi = m.group(3)
-        # 标题：第一个句点后到 *Journal* 前
+        # Title: after the first period to before *Journal*
         title_m = re.search(r"^\s*[^.]+\.\s+(.*?)\.\s+\*", body)
         title = title_m.group(1).strip() if title_m else ""
         year_m = re.search(r"\*\*(\d{4})\*\*", body)
@@ -50,12 +50,12 @@ def main():
     with open(SRC, encoding="utf-8") as f:
         text = f.read()
     refs = extract_refs(text)
-    print(f"解析到 {len(refs)} 条参考文献", file=sys.stderr)
+    print(f"Parsed {len(refs)} references", file=sys.stderr)
     rows = []
     for rf in refs:
         xt, xy, status = query_crossref(rf["doi"])
         tsim = norm(rf["title"]) == norm(xt) if xt else False
-        # 标题词重叠
+        # Title word overlap
         a = set(norm(rf["title"]).split()); b = set(norm(xt).split())
         overlap = len(a & b) / max(1, len(a | b)) if (a or b) else 0
         ysim = (rf["year"] == xy) if xy else None
@@ -79,7 +79,7 @@ def main():
         w = csv.DictWriter(f, fieldnames=["num","doi","stated_year","crossref_year","title_overlap","status","flag","stated_title","crossref_title"])
         w.writeheader(); w.writerows(rows)
     bad = [r for r in rows if r["flag"] != "OK"]
-    print(f"\n核验完成：{len(rows)} 条，异常 {len(bad)} 条", file=sys.stderr)
+    print(f"\nVerification complete: {len(rows)} items, {len(bad)} issues", file=sys.stderr)
     for r in bad:
         print(f"  -> [{r['num']:02d}] {r['flag']} | stated={r['stated_title']} | crossref={r['crossref_title']}", file=sys.stderr)
 

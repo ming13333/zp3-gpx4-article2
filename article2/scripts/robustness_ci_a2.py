@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-A2 审稿整改 - 稳健性分析 (2026-08-17)
+A2 reviewer revision - robustness analysis (2026-08-17)
 ======================================
-回应资深审稿质疑:
-  R1. rank-biserial r 的近似正态 CI 是否稳健
-      -> 分层有放回 bootstrap 95% CI (B=20000, 每队列分别抽样)
-  R2. GSE91061 逻辑回归在仅 10 个 responder 下是否稳定
-      -> Firth 惩罚似然 logistic (univariable + IFN-gamma/immunosuppression 调整)
-  R3. GSE91061 敏感性分析 n=105 样本含同一患者多 visit 样本 (伪重复)
-      -> patient-level 聚合敏感性 (每患者取 1 个样本, Pre 优先; 共 62 患者)
-      + 明确统计 105 样本 -> 62 患者, 42 患者双 visit
+Response to senior reviewer concerns:
+  R1. Whether the approximate normal CI for rank-biserial r is robust
+      -> stratified bootstrap 95% CI with replacement (B=20000, sampling each cohort separately)
+  R2. Whether logistic regression on GSE91061 is stable with only 10 responders
+      -> Firth penalized-likelihood logistic (univariable + adjusted for IFN-gamma/immunosuppression)
+  R3. GSE91061 sensitivity analysis n=105 samples contain multiple visit samples from the same patient (pseudo-replication)
+      -> patient-level aggregated sensitivity (take 1 sample per patient, Pre preferred; 62 patients total)
+      + explicitly count 105 samples -> 62 patients, 42 patients with two visits
 
-输出 (article2/results/):
-  a2_robustness_bootstrap.csv   (三队列 bootstrap CI)
-  a2_gse91061_firth.csv         (Firth logistic 结果)
-  a2_gse91061_patient_level.csv (patient-level 敏感性)
+Output (article2/results/):
+  a2_robustness_bootstrap.csv   (bootstrap CI for three cohorts)
+  a2_gse91061_firth.csv         (Firth logistic results)
+  a2_gse91061_patient_level.csv (patient-level sensitivity)
 """
 import os
 import re
@@ -57,7 +57,7 @@ def bootstrap_ci(x_resp, x_non, B=B, seed=20260817):
 
 
 # ================================================================
-# 加载三队列主分析数据 (与 recompute_effects_a2.py 同源)
+# Load main analysis data for the three cohorts (same source as recompute_effects_a2.py)
 # ================================================================
 
 # --- GSE78220 (baseline) ---
@@ -108,7 +108,7 @@ r91 = pre9[pre9["binary_response"] == "Response"]["zp3"].astype(float).values
 n91 = pre9[pre9["binary_response"] == "Non-response"]["zp3"].astype(float).values
 
 # ================================================================
-# R1. Bootstrap CI (三队列)
+# R1. Bootstrap CI (three cohorts)
 # ================================================================
 print("=" * 70)
 print("R1. Bootstrap 95% CI for rank-biserial r (B=20000, stratified)")
@@ -127,21 +127,21 @@ for name, rr, nn in [("GSE78220", r20, n20), ("IMvigor210", r21, n21), ("GSE9106
           f"bootstrap CI ({lo_b:.2f},{hi_b:.2f})")
 
 # ================================================================
-# R3. GSE91061 patient-level 敏感性 (先去重统计, 再做聚合)
+# R3. GSE91061 patient-level sensitivity (deduplicate first, then aggregate)
 # ================================================================
 print()
 print("=" * 70)
-print("R3. GSE91061 patient-level sensitivity (每患者 1 样本, Pre 优先)")
+print("R3. GSE91061 patient-level sensitivity (1 sample per patient, Pre preferred)")
 print("=" * 70)
 all_ev = cl[cl["binary_response"].isin(["Response", "Non-response"])].copy()
 all_ev["patient"] = all_ev["sample_title"].str.extract(r"(Pt\d+)", expand=False)
 n_patients = all_ev["patient"].nunique()
 n_samples = len(all_ev)
 both = all_ev.groupby("patient")["visit"].apply(lambda v: set(v) == {"Pre", "On"})
-print(f"全样本敏感性: {n_samples} samples -> {n_patients} unique patients; "
-      f"{int(both.sum())} patients 同时有 Pre+On 两 visit 样本")
+print(f"All-sample sensitivity: {n_samples} samples -> {n_patients} unique patients; "
+      f"{int(both.sum())} patients with both Pre+On visit samples")
 
-# patient-level: Pre 优先, 无 Pre 取 On (与每患者单样本原则一致)
+# patient-level: Pre preferred, On if no Pre (consistent with one-sample-per-patient principle)
 pl = all_ev.sort_values(["patient", "visit"], key=lambda s: s.map({"Pre": 0, "On": 1}) if s.name == "visit" else s)
 pl = pl.groupby("patient").first().reset_index()
 r_pl = pl[pl["binary_response"] == "Response"]["zp3"].astype(float).values
@@ -152,30 +152,30 @@ print(f"patient-level: n={len(pl)} (R {len(r_pl)} / NR {len(n_pl)}); "
       f"U={u_pl:.0f} P={p_pl:.4f} r_rb={r_pl_rb:+.3f} CI ({lo_pl:.2f},{hi_pl:.2f})")
 
 # ================================================================
-# R2. GSE91061 Firth 惩罚 logistic (univariable + 调整模型)
+# R2. GSE91061 Firth penalized logistic (univariable + adjusted model)
 # ================================================================
 print()
 print("=" * 70)
 print("R2. GSE91061 Firth penalized logistic (Pre n=49, 10 responders)")
 print("=" * 70)
 
-# 免疫特征 (IFN-gamma Ayers / immunosuppression score) —— 从分子亚型文件或免疫特征文件读取
+# Immune features (IFN-gamma Ayers / immunosuppression score) —— read from molecular subtype file or immune feature file
 def load_g9_immune():
-    """尝试从 molecular-subtype 输出读取 IFN-gamma/CD8 分数; 若无则从表达矩阵计算
-    Ayers IFN-gamma: CXCL9, CXCL10, CCL5, IFNG, IDO1, STAT1, PRF1, GZMA, GZMB, HLA-DRA (10 基因均值)
+    """Attempt to read IFN-gamma/CD8 scores from molecular-subtype output; if absent, compute from expression matrix
+    Ayers IFN-gamma: CXCL9, CXCL10, CCL5, IFNG, IDO1, STAT1, PRF1, GZMA, GZMB, HLA-DRA (mean of 10 genes)
     immunosuppression score: TGFB1, IL10, CD274, PDCD1LG2, CTLA4, LAG3, HAVCR2, PDCD1, TIGIT, CD163, MRC1, FOXP3
     """
     genes_ifn = ["CXCL9", "CXCL10", "CCL5", "IFNG", "IDO1", "STAT1", "PRF1", "GZMA", "GZMB", "HLA-DRA"]
     genes_immuno = ["TGFB1", "IL10", "CD274", "PDCD1LG2", "CTLA4", "LAG3", "HAVCR2", "PDCD1", "TIGIT", "CD163", "MRC1", "FOXP3"]
-    # 需要 symbol->Entrez 映射: GSE91061 FPKM 是 Entrez 行名, 用已知常用 Entrez 映射
+    # Need symbol->Entrez mapping: GSE91061 FPKM uses Entrez row names, use known common Entrez mapping
     symbol2entrez = {}
-    # 从 fData? GSE91061 无 fData; 用 IMvigor210 fData 的 symbol->entrez 映射
+    # From fData? GSE91061 has no fData; use symbol->entrez mapping from IMvigor210 fData
     try:
         fd2 = pd.read_csv(os.path.join(im, "fData_IMvigor210.csv"))
         symbol2entrez = dict(zip(fd2["Symbol"].astype(str), fd2["EntrezGene"].astype(str)))
     except Exception:
         pass
-    # 补充常用映射 (Ayers 10 基因 + 免疫抑制 12 基因)
+    # Supplement common mappings (Ayers 10 genes + immunosuppressive 12 genes)
     extra = {
         "CXCL9": 4283, "CXCL10": 3627, "CCL5": 6352, "IFNG": 3458, "IDO1": 3620,
         "STAT1": 6772, "PRF1": 5551, "GZMA": 3001, "GZMB": 3002, "HLA-DRA": 3122,
@@ -190,17 +190,17 @@ def load_g9_immune():
         e = symbol2entrez.get(g)
         if e is not None:
             try:
-                e_int = int(e)  # expr index 为 int64; 字符串会匹配失败
+                e_int = int(e)  # expr index is int64; string will fail to match
             except (TypeError, ValueError):
                 e_int = e
             if e_int in expr.index:
                 found[g] = expr.loc[e_int].astype(float)
-    # 样本对齐
+    # Sample alignment
     df = pre9.set_index("sample_title")
     out_cols = {}
     for g in genes_ifn + genes_immuno:
         if g in found:
-            # reindex 按 sample_title 对齐 (found[g] index 也是 sample_title)
+            # reindex aligns by sample_title (found[g] index is also sample_title)
             out_cols[g] = found[g].reindex(df.index)
     out_cols["zp3"] = df["zp3"]
     out_cols["y"] = (df["binary_response"] == "Response").astype(int)
@@ -211,7 +211,7 @@ def load_g9_immune():
 
 def firth_logit(y, X, ridge=1e-6):
     """Firth penalized logistic regression with tiny ridge for numerical stability.
-    X 含截距列. 返回 (beta, cov, n_iter)."""
+    X contains intercept column. Returns (beta, cov, n_iter)."""
     n, p = X.shape
     beta = np.zeros(p)
     for it in range(200):
@@ -243,7 +243,7 @@ for model_name, cols in [("univariable", ["zp3"]),
                           ("+IFN-gamma score", ["zp3", "ifn"]),
                           ("+immunosuppression score", ["zp3", "immuno"])]:
     X = np.column_stack([np.ones(len(d9))] + [d9[c].values for c in cols])
-    # 标准化连续变量 (zp3/ifn/immuno) 避免尺度问题
+    # Standardize continuous variables (zp3/ifn/immuno) to avoid scale issues
     Xn = X.copy()
     for j in range(1, X.shape[1]):
         s = Xn[:, j].std()
@@ -267,7 +267,7 @@ for model_name, cols in [("univariable", ["zp3"]),
                   f"P={pvals[j]:.3f} (n={len(d9)}, events={int(y.sum())}, iter={n_iter})")
 
 # ================================================================
-# 保存
+# Save
 # ================================================================
 pd.DataFrame(boot_rows).to_csv(os.path.join(OUT, "a2_robustness_bootstrap.csv"), index=False)
 pd.DataFrame(firth_rows).to_csv(os.path.join(OUT, "a2_gse91061_firth.csv"), index=False)

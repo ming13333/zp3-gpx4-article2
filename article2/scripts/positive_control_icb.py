@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-A2 P1 阳性对照最终版: 金标准阳性对照 (TMB, PD-L1 IHC IC score) + 表达类标志物
+A2 P1 positive control final version: gold-standard positive controls (TMB, PD-L1 IHC IC score) + expression-based biomarkers
 =============================================================================
-方向修正: rank-biserial r = 2U/(n1*n2) - 1, U 为 responder 组的 U 统计量。
-r>0 表示 responder 组更高。
-结果: 两个金标准标志物 (TMB P<0.0001; IC score P=0.0012) 均显著 -> pipeline 灵敏度验证通过。
+Direction correction: rank-biserial r = 2U/(n1*n2) - 1, where U is the U statistic of the responder group.
+r>0 indicates the responder group is higher.
+Results: both gold-standard biomarkers (TMB P<0.0001; IC score P=0.0012) are significant -> pipeline sensitivity validation passed.
 """
 import os
 import numpy as np
