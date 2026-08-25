@@ -100,7 +100,7 @@ def main():
     
     # 3. Align samples and extract ZP3
     print("\n3. Aligning samples and extracting ZP3...")
-    # 2026-08-17 audit fix: ZP3 = 7784 (previously incorrectly used 8277=SP5)
+    zp3_entrez = 7784  # 2026-08-17 audit fix: ZP3 = 7784 (previously incorrectly used 8277=SP5)
     common_samples = [t for t in clinical['sample_title'] if t in expr.columns]
     print(f"  Common sample count: {len(common_samples)}")
     

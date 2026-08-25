@@ -79,7 +79,7 @@ for i, c in enumerate(cohorts):
     xlo, xhi, xr = lin(c["lo"], rmin, rmax, x0, x1), lin(c["hi"], rmin, rmax, x0, x1), lin(c["r"], rmin, rmax, x0, x1)
     s += line(xlo, cy, xhi, cy, "#666", 2)
     s += line(xlo, cy - 8, xlo, cy + 8, "#666", 2) + line(xhi, cy - 8, xhi, cy + 8, "#666", 2)
-    # All three cohorts non-significant -> blue
+    s += rect(xr - 6, cy - 6, 12, 12, "#2980b9", "#000", 1)  # All three cohorts non-significant -> blue
     s += txt(x1 + 14, cy + 2, f"{c['r']:.3f} ({c['lo']:.2f}, {c['hi']:.2f})", 10, "start")
 
 # Legend and notes
