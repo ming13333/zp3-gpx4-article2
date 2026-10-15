@@ -15,6 +15,11 @@ article*/data/
 article3/data/
 external_reanalysis/
 
+# --- Submission-strategy working files (never public) ---
+# Cover letters, suggested-reviewer shortlists and journal-choice notes are
+# internal working documents. They must not enter this public archive.
+article2/reports/
+
 # --- Python ---
 __pycache__/
 *.pyc

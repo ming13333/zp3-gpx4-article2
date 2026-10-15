@@ -8,7 +8,6 @@ Standalone code & data repository for **Article 2** of the ZP3–GPX4 extracellu
   - `scripts/`  — analysis scripts
   - `results/`  — **frozen result tables** (numerical truth; do not edit by hand)
   - `figures/`  — submission-grade SVG figures
-  - `reports/`  — audit / reference-verification reports
 
 - `shared/` — shared utilities (scripts, fetch, data) copied in for self-containment
 - `LICENSE`, `requirements.txt`, `environment.yml`
