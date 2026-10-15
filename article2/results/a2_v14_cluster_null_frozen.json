@@ -1,0 +1,155 @@
+{
+ "_provenance": {
+  "derived_from": "results/a2_v14_paired_bootstrap.json",
+  "generator": "scripts/export_v14_frozen.py",
+  "seed": 20261015,
+  "n_genes": 22187,
+  "note": "Derived view restating the v14 numbers in the v13 frozen schema. Authoritative artefact = a2_v14_paired_bootstrap.json."
+ },
+ "frozen_caliber_observed": {
+  "A_pre": {
+   "n": 49,
+   "nR": 10,
+   "nN": 39,
+   "sig": 832
+  },
+  "On_only": {
+   "n": 56,
+   "nR": 13,
+   "nN": 43,
+   "sig": 4015
+  },
+  "B_naive": {
+   "n": 105,
+   "nR": 23,
+   "nN": 82,
+   "sig": 4334
+  },
+  "C_patient": {
+   "n": 62,
+   "nR": 14,
+   "nN": 48,
+   "sig": 843
+  }
+ },
+ "vectorized_check": {
+  "A_pre": {
+   "cont_on": 832,
+   "cont_off": 961
+  },
+  "On_only": {
+   "cont_on": 4015,
+   "cont_off": 4023
+  },
+  "B_naive": {
+   "cont_on": 4334,
+   "cont_off": 4368
+  },
+  "C_patient": {
+   "cont_on": 843,
+   "cont_off": 849
+  }
+ },
+ "perm": {
+  "A_pre": {
+   "n": 49,
+   "n_patients": 49,
+   "nR_patients": 10,
+   "observed_vectorized": 832,
+   "observed_scipy": 832,
+   "null_mean": 991.5851,
+   "null_sd": 466.7923059173923,
+   "null_pct": 4.47,
+   "perm_P": 0.5520447955204479,
+   "tail_hits": 5520,
+   "nperm": 10000,
+   "excess": -159
+  },
+  "On_only": {
+   "n": 56,
+   "n_patients": 55,
+   "nR_patients": 13,
+   "observed_vectorized": 4015,
+   "observed_scipy": 4015,
+   "null_mean": 1085.8525,
+   "null_sd": 542.095844601509,
+   "null_pct": 4.89,
+   "perm_P": 0.0015998400159984002,
+   "tail_hits": 15,
+   "nperm": 10000,
+   "excess": 2929
+  },
+  "B_naive": {
+   "n": 105,
+   "n_patients": 62,
+   "nR_patients": 14,
+   "observed_vectorized": 4334,
+   "observed_scipy": 4334,
+   "null_mean": 2250.4333,
+   "null_sd": 805.3236246163069,
+   "null_pct": 10.14,
+   "perm_P": 0.022297770222977704,
+   "tail_hits": 222,
+   "nperm": 10000,
+   "excess": 2083
+  },
+  "C_patient": {
+   "n": 62,
+   "n_patients": 62,
+   "nR_patients": 14,
+   "observed_vectorized": 843,
+   "observed_scipy": 843,
+   "null_mean": 1033.1241,
+   "null_sd": 498.99406069256037,
+   "null_pct": 4.66,
+   "perm_P": 0.5715428457154285,
+   "tail_hits": 5715,
+   "nperm": 10000,
+   "excess": -190
+  }
+ },
+ "perm_fixed42": {
+  "P_pre42": {
+   "n": 42,
+   "n_patients": 42,
+   "nR_patients": 9,
+   "observed_vectorized": 1132,
+   "observed_scipy": 1132,
+   "null_mean": 1011.7322,
+   "null_sd": 475.94399035112855,
+   "null_pct": 4.56,
+   "perm_P": 0.2980701929807019,
+   "tail_hits": 2980,
+   "nperm": 10000,
+   "excess": 120
+  },
+  "P_on42": {
+   "n": 42,
+   "n_patients": 42,
+   "nR_patients": 9,
+   "observed_vectorized": 4828,
+   "observed_scipy": 4828,
+   "null_mean": 1002.7485,
+   "null_sd": 515.8152434586326,
+   "null_pct": 4.52,
+   "perm_P": 0.00039996000399960006,
+   "tail_hits": 3,
+   "nperm": 10000,
+   "excess": 3825
+  },
+  "P_pool84": {
+   "n": 84,
+   "n_patients": 42,
+   "nR_patients": 9,
+   "observed_vectorized": 5252,
+   "observed_scipy": 5252,
+   "null_mean": 2511.9892,
+   "null_sd": 847.1604065103586,
+   "null_pct": 11.32,
+   "perm_P": 0.0086991300869913,
+   "tail_hits": 86,
+   "nperm": 10000,
+   "excess": 2740
+  }
+ }
+}

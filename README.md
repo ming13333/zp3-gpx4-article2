@@ -35,5 +35,28 @@ single frozen pipeline. The two calibers below are **not** interchangeable.
 - `article2/scripts/a2_cluster_permutation.py`, `a2_transcriptome_cluster_null.py` — the diagnostic-caliber
   exploratory versions kept for traceability only; their outputs are **superseded** by the frozen pipeline.
 
+### Current (v14) permutation caliber — 10,000 permutations
+
+The permutation counts in the submitted manuscript use **10,000** permutations, not 500. The authoritative
+artefact is `article2/results/a2_v14_paired_bootstrap.json`; `article2/scripts/export_v14_frozen.py`
+restates it in the v13 schema as `article2/results/a2_v14_cluster_null_frozen.json`, which is what
+`article2/scripts/gen_fig6_v14_cluster_null.py` (Figure 6) and
+`article2/scripts/build_supp_tables_v14.py` (Supplementary Tables S9 and S10) consume.
+
+| Framework | n | Observed | Null mean | Null share of 5% | Permutation P | Excess |
+|---|---|---|---|---|---|---|
+| A — pre-treatment only | 49 | 832 | 991.6 | 4.47% | 0.552 | −159 |
+| On-treatment only | 56 | 4,015 | 1,085.9 | 4.89% | 0.0016 | +2,929 |
+| B — naive pooled (pre + on) | 105 | 4,334 | 2,250.4 | **10.14%** | 0.0223 | +2,083 |
+| C — patient-level aggregated | 62 | 843 | 1,033.1 | 4.66% | 0.5715 | −190 |
+
+Fixed-42-patient isolation experiment (`part1_fixed42`), in which the patient set and the gene set are both
+held fixed and only the analysis unit changes: pre-treatment 4.56%, on-treatment 4.52%, pooled **11.32%**.
+
+Two uncertainties are reported rather than asserted. The excess-over-null difference between pooled and
+on-treatment-only analyses is −1,517 (95% CI −3,423 to +149; stratified patient bootstrap, B = 600) and
+−1,053 (jackknife SE 1,390; 95% CI −3,776 to +1,671); both intervals include zero, so the reduction in
+signal recovery is labelled exploratory in the manuscript.
+
 ## Author
 Ming Luo — Lishui Central Hospital / The Fifth Affiliated Hospital of Wenzhou Medical University, Wenzhou, China.

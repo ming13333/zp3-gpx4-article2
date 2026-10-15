@@ -1,0 +1,132 @@
+{
+ "seed": 20261015,
+ "n_genes": 22187,
+ "part1_fixed42": {
+  "P_pre42": {
+   "nperm": 10000,
+   "n": 42,
+   "n_patients": 42,
+   "nR_patients": 9,
+   "null_mean": 1011.7322,
+   "null_sd": 475.94399035112855,
+   "null_pct": 4.56,
+   "observed": 1132,
+   "perm_P": 0.2980701929807019,
+   "tail_hits": 2980,
+   "excess": 120
+  },
+  "P_on42": {
+   "nperm": 10000,
+   "n": 42,
+   "n_patients": 42,
+   "nR_patients": 9,
+   "null_mean": 1002.7485,
+   "null_sd": 515.8152434586326,
+   "null_pct": 4.52,
+   "observed": 4828,
+   "perm_P": 0.00039996000399960006,
+   "tail_hits": 3,
+   "excess": 3825
+  },
+  "P_pool84": {
+   "nperm": 10000,
+   "n": 84,
+   "n_patients": 42,
+   "nR_patients": 9,
+   "null_mean": 2511.9892,
+   "null_sd": 847.1604065103586,
+   "null_pct": 11.32,
+   "observed": 5252,
+   "perm_P": 0.0086991300869913,
+   "tail_hits": 86,
+   "excess": 2740
+  }
+ },
+ "part2_bootstrap": {
+  "NBOOT": 600,
+  "NINNER": 80,
+  "stratified": true,
+  "excess_diff_mean": -1516.5883333333334,
+  "excess_diff_sd": 941.7920130564837,
+  "ci95": [
+   -3423.1499999999996,
+   148.59999999999854
+  ],
+  "excludes_zero": false,
+  "exc_on_mean": 3276.01,
+  "exc_pool_mean": 1759.4216666666666,
+  "cnt_on_mean": 6634.3983333333335,
+  "cnt_pool_mean": 7346.606666666667,
+  "frac_diff_negative": 0.96
+ },
+ "part3_main_10k": {
+  "A_pre": {
+   "nperm": 10000,
+   "n": 49,
+   "n_patients": 49,
+   "nR_patients": 10,
+   "null_mean": 991.5851,
+   "null_sd": 466.7923059173923,
+   "null_pct": 4.47,
+   "observed": 832,
+   "perm_P": 0.5520447955204479,
+   "tail_hits": 5520,
+   "excess": -159
+  },
+  "On_only": {
+   "nperm": 10000,
+   "n": 56,
+   "n_patients": 55,
+   "nR_patients": 13,
+   "null_mean": 1085.8525,
+   "null_sd": 542.095844601509,
+   "null_pct": 4.89,
+   "observed": 4015,
+   "perm_P": 0.0015998400159984002,
+   "tail_hits": 15,
+   "excess": 2929
+  },
+  "B_naive": {
+   "nperm": 10000,
+   "n": 105,
+   "n_patients": 62,
+   "nR_patients": 14,
+   "null_mean": 2250.4333,
+   "null_sd": 805.3236246163069,
+   "null_pct": 10.14,
+   "observed": 4334,
+   "perm_P": 0.022297770222977704,
+   "tail_hits": 222,
+   "excess": 2083
+  },
+  "C_patient": {
+   "nperm": 10000,
+   "n": 62,
+   "n_patients": 62,
+   "nR_patients": 14,
+   "null_mean": 1033.1241,
+   "null_sd": 498.99406069256037,
+   "null_pct": 4.66,
+   "observed": 843,
+   "perm_P": 0.5715428457154285,
+   "tail_hits": 5715,
+   "excess": -190
+  }
+ },
+ "part4_jackknife": {
+  "n": 42,
+  "theta_mean": -1052.547619047619,
+  "se": 1389.558191136049,
+  "ci95": [
+   -3776.0816736742745,
+   1670.9864355790367
+  ],
+  "excludes_zero": false,
+  "excess_on_mean": 3733.9523809523807,
+  "excess_pool_mean": 2681.404761904762,
+  "null_on_mean": 985.517857142857,
+  "null_pool_mean": 2520.5473214285716,
+  "cnt_on_mean": 4720.0,
+  "cnt_pool_mean": 5202.380952380952
+ }
+}
