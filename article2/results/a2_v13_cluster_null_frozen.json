@@ -1,0 +1,96 @@
+{
+ "frozen_caliber_observed": {
+  "A_pre": {
+   "n": 49,
+   "nR": 10,
+   "nN": 39,
+   "sig": 832
+  },
+  "On_only": {
+   "n": 56,
+   "nR": 13,
+   "nN": 43,
+   "sig": 4015
+  },
+  "B_naive": {
+   "n": 105,
+   "nR": 23,
+   "nN": 82,
+   "sig": 4334
+  },
+  "C_patient": {
+   "n": 62,
+   "nR": 14,
+   "nN": 48,
+   "sig": 843
+  }
+ },
+ "vectorized_check": {
+  "A_pre": {
+   "cont_on": 832,
+   "cont_off": 961
+  },
+  "On_only": {
+   "cont_on": 4015,
+   "cont_off": 4023
+  },
+  "B_naive": {
+   "cont_on": 4334,
+   "cont_off": 4368
+  },
+  "C_patient": {
+   "cont_on": 843,
+   "cont_off": 849
+  }
+ },
+ "perm": {
+  "A_pre": {
+   "n": 49,
+   "n_patients": 49,
+   "nR_patients": 10,
+   "observed_vectorized": 832,
+   "observed_scipy": 832,
+   "null_mean": 1017.032,
+   "null_p95": 1967.1999999999998,
+   "null_pct": 4.58,
+   "perm_P": 0.558,
+   "excess": -185
+  },
+  "On_only": {
+   "n": 56,
+   "n_patients": 55,
+   "nR_patients": 13,
+   "observed_vectorized": 4015,
+   "observed_scipy": 4015,
+   "null_mean": 1088.75,
+   "null_p95": 2248.05,
+   "null_pct": 4.91,
+   "perm_P": 0.002,
+   "excess": 2927
+  },
+  "B_naive": {
+   "n": 105,
+   "n_patients": 62,
+   "nR_patients": 14,
+   "observed_vectorized": 4334,
+   "observed_scipy": 4334,
+   "null_mean": 2242.52,
+   "null_p95": 3550.3499999999976,
+   "null_pct": 10.11,
+   "perm_P": 0.012,
+   "excess": 2092
+  },
+  "C_patient": {
+   "n": 62,
+   "n_patients": 62,
+   "nR_patients": 14,
+   "observed_vectorized": 843,
+   "observed_scipy": 843,
+   "null_mean": 1034.4,
+   "null_p95": 1941.05,
+   "null_pct": 4.66,
+   "perm_P": 0.614,
+   "excess": -191
+  }
+ }
+}

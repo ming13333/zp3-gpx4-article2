@@ -1,1 +1,314 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="600" viewBox="0 0 720 600" font-family="Arial, Helvetica, sans-serif"><rect x="0.0" y="0.0" width="720.0" height="600.0" fill="#ffffff" stroke="#000" stroke-width="1"/><text x="40.0" y="34.0" font-size="15" text-anchor="start" fill="#000" font-weight="bold" font-family="Arial, Helvetica, sans-serif">Figure 4. Positive controls confirm assay sensitivity (IMvigor210)</text><text x="40.0" y="52.0" font-size="10" text-anchor="start" fill="#555" font-weight="normal" font-family="Arial, Helvetica, sans-serif">TMB by response and PD-L1 IHC response rate; both reproduce known ICB associations</text><line x1="120.0" y1="520.0" x2="120.0" y2="130.0" stroke="#000" stroke-width="1"/><rect x="165.0" y="247.0" width="70.0" height="273.0" fill="#c0392b" stroke="#000" stroke-width="1"/><text x="200.0" y="237.0" font-size="10" text-anchor="middle" fill="#000" font-weight="bold" font-family="Arial, Helvetica, sans-serif">14.0</text><text x="200.0" y="538.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">Responder</text><text x="200.0" y="553.0" font-size="8" text-anchor="middle" fill="#555" font-weight="normal" font-family="Arial, Helvetica, sans-serif">n=61</text><rect x="285.0" y="383.5" width="70.0" height="136.5" fill="#95a5a6" stroke="#000" stroke-width="1"/><text x="320.0" y="373.5" font-size="10" text-anchor="middle" fill="#000" font-weight="bold" font-family="Arial, Helvetica, sans-serif">7.0</text><text x="320.0" y="538.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">Non-responder</text><text x="320.0" y="553.0" font-size="8" text-anchor="middle" fill="#555" font-weight="normal" font-family="Arial, Helvetica, sans-serif">n=173</text><text x="90.0" y="325.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif" transform="rotate(-90 90 325.0)">TMB (mut/Mb, median)</text><text x="120.0" y="540.0" font-size="9" text-anchor="start" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">0</text><text x="120.0" y="130.0" font-size="9" text-anchor="start" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">20</text><text x="200.0" y="555.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">P=1.1x10-7 (Mann-Whitney), r=0.46</text><line x1="480.0" y1="520.0" x2="480.0" y2="130.0" stroke="#000" stroke-width="1"/><rect x="525.0" y="185.6" width="70.0" height="334.4" fill="#c0392b" stroke="#000" stroke-width="1"/><text x="560.0" y="175.6" font-size="10" text-anchor="middle" fill="#000" font-weight="bold" font-family="Arial, Helvetica, sans-serif">34.3%</text><text x="560.0" y="538.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">IC2+</text><text x="560.0" y="553.0" font-size="8" text-anchor="middle" fill="#555" font-weight="normal" font-family="Arial, Helvetica, sans-serif">35/102 responders</text><rect x="645.0" y="355.2" width="70.0" height="164.8" fill="#95a5a6" stroke="#000" stroke-width="1"/><text x="680.0" y="345.2" font-size="10" text-anchor="middle" fill="#000" font-weight="bold" font-family="Arial, Helvetica, sans-serif">16.9%</text><text x="680.0" y="538.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">IC0/1</text><text x="680.0" y="553.0" font-size="8" text-anchor="middle" fill="#555" font-weight="normal" font-family="Arial, Helvetica, sans-serif">33/195 responders</text><text x="450.0" y="325.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif" transform="rotate(-90 450 325.0)">Response rate by PD-L1 IHC</text><text x="480.0" y="540.0" font-size="9" text-anchor="start" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">0</text><text x="480.0" y="130.0" font-size="9" text-anchor="start" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">40%</text><text x="560.0" y="555.0" font-size="9" text-anchor="middle" fill="#000" font-weight="normal" font-family="Arial, Helvetica, sans-serif">P=1.2x10-3 (chi-square)</text><text x="40.0" y="576.0" font-size="8.5" text-anchor="start" fill="#777" font-weight="normal" font-family="Arial, Helvetica, sans-serif">Source: positive_control_results.csv</text><text x="40.0" y="590.0" font-size="8.5" text-anchor="start" fill="#777" font-weight="normal" font-family="Arial, Helvetica, sans-serif">IMvigor210 n=348 enrolled (298 evaluable); pre-specified reference biomarkers significant -&gt; pipeline sensitivity indicated in this cohort.</text></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="720"
+   height="600"
+   viewBox="0 0 720 600"
+   font-family="Arial, Helvetica, sans-serif"
+   version="1.1"
+   id="svg24"
+   sodipodi:docname="A2_Fig4.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs24" />
+  <sodipodi:namedview
+     id="namedview24"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.86620581"
+     inkscape:cx="436.96313"
+     inkscape:cy="415.02839"
+     inkscape:window-width="1680"
+     inkscape:window-height="979"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg24" />
+  <rect
+     x="0.0"
+     y="0.0"
+     width="720.0"
+     height="600.0"
+     fill="#ffffff"
+     stroke="#000"
+     stroke-width="1"
+     id="rect1" />
+  <text
+     x="40.0"
+     y="34.0"
+     font-size="15"
+     text-anchor="start"
+     fill="#000"
+     font-weight="bold"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text1">Figure 4. Positive controls confirm assay sensitivity (IMvigor210)</text>
+  <text
+     x="40.0"
+     y="52.0"
+     font-size="10"
+     text-anchor="start"
+     fill="#555"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text2">TMB by response and PD-L1 IHC response rate; both reproduce known ICB associations</text>
+  <line
+     x1="62"
+     y1="496"
+     x2="62"
+     y2="106"
+     stroke="#000000"
+     stroke-width="1"
+     id="line2" />
+  <rect
+     x="107"
+     y="223"
+     width="70"
+     height="273"
+     fill="#c0392b"
+     stroke="#000000"
+     stroke-width="1"
+     id="rect2" />
+  <text
+     x="142"
+     y="213"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="bold"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text3">14.0</text>
+  <text
+     x="142"
+     y="514"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text4">Responder</text>
+  <text
+     x="142"
+     y="529"
+     font-size="8px"
+     text-anchor="middle"
+     fill="#555555"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text5">n=61</text>
+  <rect
+     x="227"
+     y="359.5"
+     width="70"
+     height="136.5"
+     fill="#95a5a6"
+     stroke="#000000"
+     stroke-width="1"
+     id="rect5" />
+  <text
+     x="262"
+     y="349.5"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="bold"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text6">7.0</text>
+  <text
+     x="262"
+     y="514"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text7">Non-responder</text>
+  <text
+     x="262"
+     y="529"
+     font-size="8px"
+     text-anchor="middle"
+     fill="#555555"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text8">n=173</text>
+  <text
+     x="-301"
+     y="32"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     transform="rotate(-90)"
+     id="text9">TMB (mut/Mb, median)</text>
+  <text
+     x="62"
+     y="516"
+     font-size="9px"
+     text-anchor="start"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text10">0</text>
+  <text
+     x="62"
+     y="106"
+     font-size="9px"
+     text-anchor="start"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text11">20</text>
+  <text
+     x="141.11385"
+     y="554.23566"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text12">P=1.1x10-7 (Mann-Whitney), r=0.46</text>
+  <line
+     x1="422"
+     y1="496"
+     x2="422"
+     y2="106"
+     stroke="#000000"
+     stroke-width="1"
+     id="line12" />
+  <rect
+     x="467"
+     y="161.60001"
+     width="70"
+     height="334.39999"
+     fill="#c0392b"
+     stroke="#000000"
+     stroke-width="1"
+     id="rect12" />
+  <text
+     x="502"
+     y="151.60001"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="bold"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text13">34.3%</text>
+  <text
+     x="502"
+     y="514"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text14">IC2+</text>
+  <text
+     x="502"
+     y="529"
+     font-size="8px"
+     text-anchor="middle"
+     fill="#555555"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text15">35/102 responders</text>
+  <rect
+     x="587"
+     y="331.20001"
+     width="70"
+     height="164.8"
+     fill="#95a5a6"
+     stroke="#000000"
+     stroke-width="1"
+     id="rect15" />
+  <text
+     x="622"
+     y="321.20001"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="bold"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text16">16.9%</text>
+  <text
+     x="622"
+     y="514"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text17">IC0/1</text>
+  <text
+     x="622"
+     y="529"
+     font-size="8px"
+     text-anchor="middle"
+     fill="#555555"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text18">33/195 responders</text>
+  <text
+     x="-301"
+     y="392"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     transform="rotate(-90)"
+     id="text19">Response rate by PD-L1 IHC</text>
+  <text
+     x="422"
+     y="516"
+     font-size="9px"
+     text-anchor="start"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text20">0</text>
+  <text
+     x="422"
+     y="106"
+     font-size="9px"
+     text-anchor="start"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text21">40%</text>
+  <text
+     x="502.84552"
+     y="553.65845"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#000000"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text22">P=1.2x10-3 (chi-square)</text>
+  <text
+     x="40.0"
+     y="576.0"
+     font-size="8.5"
+     text-anchor="start"
+     fill="#777"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text23">Source: positive_control_results.csv</text>
+  <text
+     x="40.0"
+     y="590.0"
+     font-size="8.5"
+     text-anchor="start"
+     fill="#777"
+     font-weight="normal"
+     font-family="Arial, Helvetica, sans-serif"
+     id="text24">IMvigor210 n=348 enrolled (298 evaluable); pre-specified reference biomarkers significant -&gt; pipeline sensitivity indicated in this cohort.</text>
+</svg>
