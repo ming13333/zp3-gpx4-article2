@@ -1,0 +1,55 @@
+{
+  "provenance": {
+    "frozen_script": "a2_zp3_fixed42_20261119.py",
+    "seed": 20261119,
+    "nperm": 10000,
+    "nboot": 10000,
+    "note": "percentile bootstrap, patients resampled within response group, both samples per patient retained, multiplicity preserved",
+    "framing": "the bootstrap interval describes the precision of the estimate; the permutation P tests exchangeability of response labels across whole patient records; they are not inverses of each other"
+  },
+  "r": -0.3602693602693603,
+  "n_samples": 84,
+  "n_patients": 42,
+  "n1": 18,
+  "n2": 66,
+  "bootstrap": {
+    "CI": [
+      -0.6397306397306397,
+      -0.06734006734006737
+    ],
+    "sd": 0.14580190656733188,
+    "median": -0.3619528619528619,
+    "mass_r_ge_0": 0.0072,
+    "inv_P_two_sided": 0.0144,
+    "nboot": 10000
+  },
+  "permutation": {
+    "perm_P": 0.06879312068793121,
+    "tail_hits": 687,
+    "nperm": 10000,
+    "sd": 0.19720541398219274,
+    "mean": -0.0020873737373737376,
+    "q": [
+      -0.38215488215488214,
+      0.38215488215488214
+    ],
+    "nR_patients": 9,
+    "nN_patients": 33
+  },
+  "reference": {
+    "se_independent_samples": 0.15443318031738035,
+    "se_patient_level": 0.2196824562720358,
+    "var_inflation_vs_independent": 1.6306337880359636,
+    "var_inflation_vs_patient": 0.8058364650177728,
+    "boot_sd_over_se_independent": 0.9441099786178717
+  },
+  "reproduction": {
+    "r_match": true,
+    "CI_match": true,
+    "perm_P_match": true,
+    "tail_hits_match": true,
+    "replay_pre42_CI": true,
+    "replay_on42_CI": true,
+    "replay_delta42_CI": true
+  }
+}

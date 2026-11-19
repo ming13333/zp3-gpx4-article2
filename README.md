@@ -57,5 +57,26 @@ on-treatment-only analyses is −1,517 (95% CI −3,423 to +149; stratified pati
 −1,053 (jackknife SE 1,390; 95% CI −3,776 to +1,671); both intervals include zero, so the reduction in
 signal recovery is labelled exploratory in the manuscript.
 
+## v1.4 — the v15 analysis layer
+
+Added with the Briefings in Bioinformatics submission. Every file is listed with its sha256 in
+`article2/archive_manifest_v1.4.json`; the three scripts that need only frozen JSON as input were re-run
+inside this directory and reproduced their committed outputs byte for byte.
+
+| Script | Produces | Role |
+|---|---|---|
+| `a2_p2_sim_core_20261118.py` | `a2_p2_sim_core_20261118_full*.json` (main + 18 cells) | S1-S4 simulation grid |
+| `a2_p2_s2_mechanism_20261118.py` | `a2_p2_s2_mechanism_20261118.json` | size of a shared time shift (Figure 2b) |
+| `a2_pooled_fourway_decomp_20261119.py` | `a2_pooled_fourway_decomp_20261119.json` | four-cell decomposition, 105-sample set |
+| `a2_zp3_fixed42_20261119.py` | `a2_zp3_fixed42_20261119.json` | 42-patient recomputation and the 84-sample pooled test |
+| `a2_zp3_cluster_perm_v15_20261119.py` | `a2_zp3_cluster_perm_v15_20261119.json` | patient-cluster permutation of the 105-sample frameworks |
+| `a2_zp3_pooled_interval_diag_20261120.py` | `a2_zp3_pooled_interval_diag_20261120.json` | replays the frozen streams: r, percentile interval, b=687 |
+| `a2_p2_partition_audit_20261120.py` | `a2_p2_partition_audit_20261120.json` | denominators behind the S3 and S4 percentages |
+| `a2_p2_icc_rank_approx_20261120.py` | `a2_p2_icc_rank_approx_20261120.json` | 1 + (6/pi)asin(rho/2) against the measured variance ratio |
+| `gen_figs_v15_20261120.py` | `A2v15_Fig1-3.svg` | Figures 1-3, drawn from frozen JSON only |
+
+The S1 rank-scale approximation is a conditional result for the balanced two-time-point, continuous-Gaussian,
+no-time-shift design; it is not carried to the real cohorts or to S2.
+
 ## Author
 Ming Luo — Lishui Central Hospital / The Fifth Affiliated Hospital of Wenzhou Medical University, Wenzhou, China.

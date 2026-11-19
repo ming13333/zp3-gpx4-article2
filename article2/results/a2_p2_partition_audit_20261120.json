@@ -1,0 +1,608 @@
+{
+  "provenance": {
+    "inputs": "results/a2_p2_sim_core_20261118_full*.json (18 grid cells + main)",
+    "identity": "all = (K/G)*signal + (1-K/G)*null, K=50, G=500",
+    "note": "derived, not simulated; block sizes asserted from n_genes"
+  },
+  "grid_cells": 18,
+  "summary": {
+    "S3": {
+      "signal": [
+        0.27416,
+        0.97728
+      ],
+      "all_genes": [
+        0.071684,
+        0.14199599999999998
+      ],
+      "null": [
+        0.04847555555555555,
+        0.05009777777777777
+      ],
+      "n_genes_signal": [
+        50,
+        50
+      ],
+      "n_genes_null": [
+        450,
+        450
+      ],
+      "delta_mwu_all": [
+        0.045548000000000005,
+        0.05006
+      ]
+    },
+    "S3_main": {
+      "signal": 0.57482,
+      "all_genes": 0.102224,
+      "null": 0.04971333333333332,
+      "n_genes_signal": 50,
+      "n_genes_null": 450,
+      "delta_mwu_all": 0.049458000000000016
+    },
+    "S4": {
+      "signal": [
+        0.12688,
+        0.66012
+      ],
+      "all_genes": [
+        0.05637600000000001,
+        0.11090800000000002
+      ],
+      "null": [
+        0.04799555555555556,
+        0.05028000000000002
+      ],
+      "n_genes_signal": [
+        50,
+        50
+      ],
+      "n_genes_null": [
+        450,
+        450
+      ],
+      "delta_mwu_signal": [
+        0.22203999999999996,
+        0.9999600000000001
+      ],
+      "mw_on_signal": [
+        0.33248,
+        0.9572
+      ],
+      "pooled_nocorr_signal": [
+        0.21419999999999997,
+        0.7136
+      ]
+    },
+    "S4_main": {
+      "signal": 0.24527999999999994,
+      "all_genes": 0.06860000000000001,
+      "null": 0.0489688888888889,
+      "n_genes_signal": 50,
+      "n_genes_null": 450,
+      "delta_mwu_signal": 0.60704,
+      "mw_on_signal": 0.60546,
+      "pooled_nocorr_signal": 0.36963999999999997
+    },
+    "S1": {
+      "pooled": [
+        0.07086400000000001,
+        0.144528
+      ],
+      "cluster": [
+        0.04874800000000001,
+        0.05075200000000001
+      ]
+    },
+    "S1_main": {
+      "pooled": 0.106766,
+      "cluster": 0.049434
+    }
+  },
+  "per_cell": [
+    {
+      "np": 160,
+      "rp": 0.25,
+      "icc": 0.2,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.92552,
+        "all_genes": 0.137284,
+        "null": 0.049702222222222196,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.049708000000000016
+      },
+      "S4": {
+        "signal": 0.5266000000000001,
+        "all_genes": 0.09761600000000001,
+        "null": 0.049951111111111106,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.70712,
+        "mw_on_signal": 0.8882400000000001,
+        "pooled_nocorr_signal": 0.5929200000000001
+      },
+      "S1": {
+        "pooled": 0.07186000000000001,
+        "cluster": 0.04943600000000001
+      }
+    },
+    {
+      "np": 160,
+      "rp": 0.25,
+      "icc": 0.5,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.8633200000000002,
+        "all_genes": 0.130564,
+        "null": 0.04914666666666666,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.049708000000000016
+      },
+      "S4": {
+        "signal": 0.44112,
+        "all_genes": 0.08918000000000001,
+        "null": 0.05007555555555556,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.88708,
+        "mw_on_signal": 0.8885599999999999,
+        "pooled_nocorr_signal": 0.58372
+      },
+      "S1": {
+        "pooled": 0.10666800000000003,
+        "cluster": 0.04924400000000001
+      }
+    },
+    {
+      "np": 160,
+      "rp": 0.25,
+      "icc": 0.8,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.79328,
+        "all_genes": 0.12372,
+        "null": 0.04932444444444443,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.049708000000000016
+      },
+      "S4": {
+        "signal": 0.37804000000000004,
+        "all_genes": 0.08279600000000001,
+        "null": 0.04999111111111111,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.9992000000000001,
+        "mw_on_signal": 0.8868800000000001,
+        "pooled_nocorr_signal": 0.5738800000000001
+      },
+      "S1": {
+        "pooled": 0.141296,
+        "cluster": 0.049264
+      }
+    },
+    {
+      "np": 160,
+      "rp": 0.5,
+      "icc": 0.2,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.97728,
+        "all_genes": 0.14199599999999998,
+        "null": 0.049186666666666636,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.05006
+      },
+      "S4": {
+        "signal": 0.66012,
+        "all_genes": 0.11090800000000002,
+        "null": 0.04988444444444447,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.8342,
+        "mw_on_signal": 0.95692,
+        "pooled_nocorr_signal": 0.7136
+      },
+      "S1": {
+        "pooled": 0.073852,
+        "cluster": 0.05075200000000001
+      }
+    },
+    {
+      "np": 160,
+      "rp": 0.5,
+      "icc": 0.5,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.9423599999999999,
+        "all_genes": 0.138,
+        "null": 0.04862666666666669,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.05006
+      },
+      "S4": {
+        "signal": 0.56856,
+        "all_genes": 0.10210800000000002,
+        "null": 0.05028000000000002,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.95604,
+        "mw_on_signal": 0.9561199999999999,
+        "pooled_nocorr_signal": 0.6938
+      },
+      "S1": {
+        "pooled": 0.10807200000000002,
+        "cluster": 0.05064800000000001
+      }
+    },
+    {
+      "np": 160,
+      "rp": 0.5,
+      "icc": 0.8,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.89552,
+        "all_genes": 0.13381200000000001,
+        "null": 0.049177777777777786,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.05006
+      },
+      "S4": {
+        "signal": 0.49163999999999997,
+        "all_genes": 0.09404000000000003,
+        "null": 0.04986222222222225,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.9999600000000001,
+        "mw_on_signal": 0.9572,
+        "pooled_nocorr_signal": 0.67772
+      },
+      "S1": {
+        "pooled": 0.143048,
+        "cluster": 0.049636000000000007
+      }
+    },
+    {
+      "np": 40,
+      "rp": 0.25,
+      "icc": 0.2,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.38368,
+        "all_genes": 0.081996,
+        "null": 0.04847555555555555,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.045548000000000005
+      },
+      "S4": {
+        "signal": 0.1654,
+        "all_genes": 0.059816,
+        "null": 0.048084444444444444,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.22203999999999996,
+        "mw_on_signal": 0.33248,
+        "pooled_nocorr_signal": 0.21419999999999997
+      },
+      "S1": {
+        "pooled": 0.071352,
+        "cluster": 0.04874800000000001
+      }
+    },
+    {
+      "np": 40,
+      "rp": 0.25,
+      "icc": 0.5,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.32096,
+        "all_genes": 0.076136,
+        "null": 0.04893333333333332,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.045548000000000005
+      },
+      "S4": {
+        "signal": 0.14200000000000002,
+        "all_genes": 0.05739600000000001,
+        "null": 0.04799555555555556,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.33104,
+        "mw_on_signal": 0.33559999999999995,
+        "pooled_nocorr_signal": 0.24495999999999998
+      },
+      "S1": {
+        "pooled": 0.10758000000000001,
+        "cluster": 0.048808000000000004
+      }
+    },
+    {
+      "np": 40,
+      "rp": 0.25,
+      "icc": 0.8,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.27416,
+        "all_genes": 0.071684,
+        "null": 0.049186666666666656,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.045548000000000005
+      },
+      "S4": {
+        "signal": 0.12688,
+        "all_genes": 0.05637600000000001,
+        "null": 0.04854222222222224,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.6790400000000001,
+        "mw_on_signal": 0.33443999999999996,
+        "pooled_nocorr_signal": 0.26712
+      },
+      "S1": {
+        "pooled": 0.144528,
+        "cluster": 0.04919200000000001
+      }
+    },
+    {
+      "np": 40,
+      "rp": 0.5,
+      "icc": 0.2,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.48876,
+        "all_genes": 0.09306,
+        "null": 0.049093333333333336,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04846000000000001
+      },
+      "S4": {
+        "signal": 0.20904,
+        "all_genes": 0.06493600000000001,
+        "null": 0.048924444444444444,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.29748,
+        "mw_on_signal": 0.43583999999999995,
+        "pooled_nocorr_signal": 0.25584
+      },
+      "S1": {
+        "pooled": 0.07086400000000001,
+        "cluster": 0.048808000000000004
+      }
+    },
+    {
+      "np": 40,
+      "rp": 0.5,
+      "icc": 0.5,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.41076,
+        "all_genes": 0.085672,
+        "null": 0.04955111111111111,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04846000000000001
+      },
+      "S4": {
+        "signal": 0.17680000000000004,
+        "all_genes": 0.062336,
+        "null": 0.049617777777777775,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.44020000000000004,
+        "mw_on_signal": 0.43424000000000007,
+        "pooled_nocorr_signal": 0.27768
+      },
+      "S1": {
+        "pooled": 0.10595600000000002,
+        "cluster": 0.04911600000000001
+      }
+    },
+    {
+      "np": 40,
+      "rp": 0.5,
+      "icc": 0.8,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.3509599999999999,
+        "all_genes": 0.07922799999999999,
+        "null": 0.04903555555555556,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04846000000000001
+      },
+      "S4": {
+        "signal": 0.15503999999999998,
+        "all_genes": 0.059716000000000005,
+        "null": 0.04912444444444445,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.8138400000000001,
+        "mw_on_signal": 0.43392,
+        "pooled_nocorr_signal": 0.29952000000000006
+      },
+      "S1": {
+        "pooled": 0.14200400000000002,
+        "cluster": 0.04911200000000001
+      }
+    },
+    {
+      "np": 80,
+      "rp": 0.25,
+      "icc": 0.2,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.66764,
+        "all_genes": 0.111144,
+        "null": 0.04931111111111111,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04925600000000001
+      },
+      "S4": {
+        "signal": 0.29284000000000004,
+        "all_genes": 0.074268,
+        "null": 0.04998222222222222,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.42127999999999993,
+        "mw_on_signal": 0.6076,
+        "pooled_nocorr_signal": 0.35368
+      },
+      "S1": {
+        "pooled": 0.07231200000000002,
+        "cluster": 0.049280000000000004
+      }
+    },
+    {
+      "np": 80,
+      "rp": 0.25,
+      "icc": 0.5,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.57432,
+        "all_genes": 0.10195599999999999,
+        "null": 0.04947111111111109,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04925600000000001
+      },
+      "S4": {
+        "signal": 0.24448,
+        "all_genes": 0.06945200000000001,
+        "null": 0.05000444444444446,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.60544,
+        "mw_on_signal": 0.60708,
+        "pooled_nocorr_signal": 0.3706400000000001
+      },
+      "S1": {
+        "pooled": 0.10672000000000001,
+        "cluster": 0.049336000000000005
+      }
+    },
+    {
+      "np": 80,
+      "rp": 0.25,
+      "icc": 0.8,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.4969199999999999,
+        "all_genes": 0.09477999999999999,
+        "null": 0.05009777777777777,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04925600000000001
+      },
+      "S4": {
+        "signal": 0.20987999999999998,
+        "all_genes": 0.065804,
+        "null": 0.04979555555555556,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.94084,
+        "mw_on_signal": 0.60516,
+        "pooled_nocorr_signal": 0.38260000000000005
+      },
+      "S1": {
+        "pooled": 0.142936,
+        "cluster": 0.049412000000000005
+      }
+    },
+    {
+      "np": 80,
+      "rp": 0.5,
+      "icc": 0.2,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.78864,
+        "all_genes": 0.123388,
+        "null": 0.049471111111111105,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04808000000000001
+      },
+      "S4": {
+        "signal": 0.38276000000000004,
+        "all_genes": 0.08287199999999999,
+        "null": 0.04955111111111109,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.52596,
+        "mw_on_signal": 0.7305200000000001,
+        "pooled_nocorr_signal": 0.4427600000000001
+      },
+      "S1": {
+        "pooled": 0.07176400000000001,
+        "cluster": 0.04918000000000001
+      }
+    },
+    {
+      "np": 80,
+      "rp": 0.5,
+      "icc": 0.5,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.6970399999999999,
+        "all_genes": 0.11436000000000002,
+        "null": 0.04961777777777781,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04808000000000001
+      },
+      "S4": {
+        "signal": 0.32472,
+        "all_genes": 0.07761200000000001,
+        "null": 0.05015555555555557,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.7339999999999999,
+        "mw_on_signal": 0.7312799999999998,
+        "pooled_nocorr_signal": 0.45160000000000006
+      },
+      "S1": {
+        "pooled": 0.10659600000000004,
+        "cluster": 0.04956
+      }
+    },
+    {
+      "np": 80,
+      "rp": 0.5,
+      "icc": 0.8,
+      "n_outer": 500,
+      "S3": {
+        "signal": 0.6172799999999999,
+        "all_genes": 0.10672799999999998,
+        "null": 0.049999999999999975,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_all": 0.04808000000000001
+      },
+      "S4": {
+        "signal": 0.27412000000000003,
+        "all_genes": 0.07224000000000001,
+        "null": 0.049808888888888896,
+        "n_genes_signal": 50,
+        "n_genes_null": 450,
+        "delta_mwu_signal": 0.98332,
+        "mw_on_signal": 0.73536,
+        "pooled_nocorr_signal": 0.4565600000000001
+      },
+      "S1": {
+        "pooled": 0.142556,
+        "cluster": 0.049628000000000005
+      }
+    }
+  ]
+}

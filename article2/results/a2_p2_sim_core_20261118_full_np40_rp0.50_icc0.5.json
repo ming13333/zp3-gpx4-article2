@@ -1,0 +1,669 @@
+{
+  "cfg": {
+    "G": 500,
+    "n_pat": 40,
+    "resp_prop": 0.5,
+    "icc": 0.5,
+    "a0": 0.5,
+    "tau0": 1.0,
+    "delta0": 0.6,
+    "sig_frac": 0.1,
+    "n_outer": 500,
+    "n_perm": 200,
+    "alpha": 0.05,
+    "seed": 20261118
+  },
+  "tag": "full_np40_rp0.50_icc0.5",
+  "checks": {
+    "S1_T1_zero": true,
+    "S1_T3_zero": true,
+    "S2_T1_zero": true,
+    "S2_T3_zero": true,
+    "S3_T3_zero": true,
+    "S4_T1_zero": true,
+    "ICC_within_0.05": true,
+    "resp_frac_ok": true,
+    "var_base_within5": true
+  },
+  "generator_reps": [
+    {
+      "scen": "S1",
+      "mean_baseline_diff": -0.00316503470089905,
+      "mean_change_diff": 0.005744613383626069,
+      "emp_icc": 0.49661167199555534,
+      "var_baseline": 0.9982072755176332,
+      "resp_frac": 0.5,
+      "se_baseline_diff": 0.003329514226646199,
+      "se_change_diff": 0.002858280765326932
+    },
+    {
+      "scen": "S2",
+      "mean_baseline_diff": 0.0014863246157466585,
+      "mean_change_diff": 0.0028601564525521797,
+      "emp_icc": 0.49808092787443536,
+      "var_baseline": 1.0015818605540505,
+      "resp_frac": 0.5,
+      "se_baseline_diff": 0.002429506386377254,
+      "se_change_diff": 0.002837326655023244
+    },
+    {
+      "scen": "S3",
+      "mean_baseline_diff": 0.04957407012654132,
+      "mean_change_diff": 0.0003862391482230583,
+      "emp_icc": 0.5035342665585307,
+      "var_baseline": 1.0097906580814726,
+      "resp_frac": 0.5,
+      "se_baseline_diff": 0.0031823495219732087,
+      "se_change_diff": 0.00303167069693612
+    },
+    {
+      "scen": "S4",
+      "mean_baseline_diff": 0.006741003032636317,
+      "mean_change_diff": 0.057964683958337704,
+      "emp_icc": 0.48847478062953575,
+      "var_baseline": 1.0014974349356363,
+      "resp_frac": 0.5,
+      "se_baseline_diff": 0.0035923132733117935,
+      "se_change_diff": 0.0034024421543583597
+    }
+  ],
+  "summary": [
+    {
+      "scenario": "S1",
+      "target": "T1",
+      "method": "mw_baseline",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.048324000000000006,
+      "ci95": [
+        0.04748335610488674,
+        0.04916464389511327
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T1",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.10595600000000002,
+      "ci95": [
+        0.10474949732033874,
+        0.1071625026796613
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T1",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04911600000000001,
+      "ci95": [
+        0.04826884801600037,
+        0.04996315198399964
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T2",
+      "method": "mw_on",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.049016000000000004,
+      "ci95": [
+        0.04816966635565458,
+        0.049862333644345426
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T2",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.10595600000000002,
+      "ci95": [
+        0.10474949732033874,
+        0.1071625026796613
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T2",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04911600000000001,
+      "ci95": [
+        0.04826884801600037,
+        0.04996315198399964
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T3",
+      "method": "delta_mwu",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.04847200000000001,
+      "ci95": [
+        0.04763013525463105,
+        0.04931386474536897
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04930000000000001,
+      "ci95": [
+        0.04845134480590526,
+        0.05014865519409476
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T3",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.10595600000000002,
+      "ci95": [
+        0.10474949732033874,
+        0.1071625026796613
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T3",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04911600000000001,
+      "ci95": [
+        0.04826884801600037,
+        0.04996315198399964
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S1",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "diag",
+      "bias_signal": -0.0023993700135951064,
+      "bias_null": -0.0003223202603859051,
+      "coverage": 0.9507000000000001
+    },
+    {
+      "scenario": "S2",
+      "target": "T1",
+      "method": "mw_baseline",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.04940400000000001,
+      "ci95": [
+        0.0485544966129268,
+        0.05025350338707322
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T1",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.068524,
+      "ci95": [
+        0.06753363962638555,
+        0.06951436037361446
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T1",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04896400000000001,
+      "ci95": [
+        0.04811809227693304,
+        0.049809907723066975
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T2",
+      "method": "mw_on",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.049336000000000005,
+      "ci95": [
+        0.04848705108258759,
+        0.05018494891741242
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T2",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.068524,
+      "ci95": [
+        0.06753363962638555,
+        0.06951436037361446
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T2",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04896400000000001,
+      "ci95": [
+        0.04811809227693304,
+        0.049809907723066975
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T3",
+      "method": "delta_mwu",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.04985600000000001,
+      "ci95": [
+        0.04900282229522666,
+        0.050709177704773366
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.049864000000000006,
+      "ci95": [
+        0.04901075743869457,
+        0.05071724256130544
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T3",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.068524,
+      "ci95": [
+        0.06753363962638555,
+        0.06951436037361446
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T3",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04896400000000001,
+      "ci95": [
+        0.04811809227693304,
+        0.049809907723066975
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S2",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "diag",
+      "bias_signal": 0.0010985200071553655,
+      "bias_null": -0.0006280057542071021,
+      "coverage": 0.950136
+    },
+    {
+      "scenario": "S3",
+      "target": "T1",
+      "method": "mw_baseline",
+      "kind": "power",
+      "correct": true,
+      "rate": 0.32576,
+      "ci95": [
+        0.3199504539017516,
+        0.3315695460982484
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T1",
+      "method": "mw_pooled",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.56352,
+      "ci95": [
+        0.5573721550143181,
+        0.5696678449856819
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T1",
+      "method": "pooled_cluster",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.41076,
+      "ci95": [
+        0.40466145475716764,
+        0.4168585452428324
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T2",
+      "method": "mw_on",
+      "kind": "power",
+      "correct": true,
+      "rate": 0.32012,
+      "ci95": [
+        0.31433692793819423,
+        0.3259030720618058
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T2",
+      "method": "mw_pooled",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.56352,
+      "ci95": [
+        0.5573721550143181,
+        0.5696678449856819
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T2",
+      "method": "pooled_cluster",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.41076,
+      "ci95": [
+        0.40466145475716764,
+        0.4168585452428324
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T3",
+      "method": "delta_mwu",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.04846000000000001,
+      "ci95": [
+        0.0476182341616306,
+        0.04930176583836942
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.04922000000000001,
+      "ci95": [
+        0.048371997972713375,
+        0.05006800202728664
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T3",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.151928,
+      "ci95": [
+        0.15052091173919196,
+        0.15333508826080805
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T3",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.085672,
+      "ci95": [
+        0.08457487394341233,
+        0.08676912605658767
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S3",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "diag",
+      "bias_signal": 0.0010404900378564836,
+      "bias_null": -9.525369170791743e-05,
+      "coverage": 0.95078
+    },
+    {
+      "scenario": "S4",
+      "target": "T1",
+      "method": "mw_baseline",
+      "kind": "TypeI",
+      "correct": true,
+      "rate": 0.049684000000000006,
+      "ci95": [
+        0.04883221818438478,
+        0.05053578181561523
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T1",
+      "method": "mw_pooled",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.12370800000000001,
+      "ci95": [
+        0.12241734733261747,
+        0.12499865266738255
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T1",
+      "method": "pooled_cluster",
+      "kind": "TypeI",
+      "correct": false,
+      "rate": 0.062336,
+      "ci95": [
+        0.06138828194682949,
+        0.06328371805317051
+      ],
+      "n_genes": 500,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T2",
+      "method": "mw_on",
+      "kind": "power",
+      "correct": true,
+      "rate": 0.43424000000000007,
+      "ci95": [
+        0.4280957751635806,
+        0.44038422483641954
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T2",
+      "method": "mw_pooled",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.27768,
+      "ci95": [
+        0.27212833582538654,
+        0.28323166417461343
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T2",
+      "method": "pooled_cluster",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.17680000000000004,
+      "ci95": [
+        0.17207088496559456,
+        0.18152911503440552
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T3",
+      "method": "delta_mwu",
+      "kind": "power",
+      "correct": true,
+      "rate": 0.44020000000000004,
+      "ci95": [
+        0.43404642450363695,
+        0.4463535754963631
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.46008000000000004,
+      "ci95": [
+        0.45390172191738265,
+        0.46625827808261744
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T3",
+      "method": "mw_pooled",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.27768,
+      "ci95": [
+        0.27212833582538654,
+        0.28323166417461343
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T3",
+      "method": "pooled_cluster",
+      "kind": "power",
+      "correct": false,
+      "rate": 0.17680000000000004,
+      "ci95": [
+        0.17207088496559456,
+        0.18152911503440552
+      ],
+      "n_genes": 50,
+      "fail_rate": 0.0
+    },
+    {
+      "scenario": "S4",
+      "target": "T3",
+      "method": "delta_welch",
+      "kind": "diag",
+      "bias_signal": 0.00379013082685971,
+      "bias_null": -0.0008253915609526076,
+      "coverage": 0.949964
+    }
+  ],
+  "elapsed_s": 53.3
+}

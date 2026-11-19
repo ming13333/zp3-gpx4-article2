@@ -1,0 +1,41 @@
+{
+  "seed": 20261014,
+  "nperm": 20000,
+  "note": "replay of a2_cluster_permutation.py rng stream; estimator changed to (b+1)/(B+1)",
+  "B": {
+    "n_samples": 105,
+    "n_patients": 62,
+    "nR_patients": 14,
+    "r": -0.3626723223753977,
+    "b": 558,
+    "B": 20000,
+    "p_plain": 0.0279,
+    "p_addone": 0.027948602569871507,
+    "frozen_b": 558,
+    "b_matches": true
+  },
+  "A": {
+    "n_samples": 49,
+    "n_patients": 49,
+    "nR_patients": 10,
+    "r": -0.19487179487179485,
+    "b": 7145,
+    "B": 20000,
+    "p_plain": 0.35725,
+    "p_addone": 0.35728213589320534,
+    "frozen_b": 7145,
+    "b_matches": true
+  },
+  "On": {
+    "n_samples": 56,
+    "n_patients": 55,
+    "nR_patients": 13,
+    "r": -0.47048300536672627,
+    "b": 262,
+    "B": 20000,
+    "p_plain": 0.0131,
+    "p_addone": 0.013149342532873356,
+    "frozen_b": 262,
+    "b_matches": true
+  }
+}

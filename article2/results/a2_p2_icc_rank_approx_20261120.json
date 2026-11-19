@@ -1,0 +1,53 @@
+{
+  "provenance": {
+    "frozen_mechanism": "a2_p2_s2_mechanism_20261118.json",
+    "n_pairs": 200000,
+    "seed": 20261120,
+    "note": "no new grid cell; (a) is a Monte Carlo check of the normal-scores identity, (b) compares with the frozen tau=0 mechanism rows"
+  },
+  "formula": "variance_ratio = 1 + (6/pi)*arcsin(rho/2)",
+  "rows": [
+    {
+      "icc": 0.2,
+      "rho_s_mc": 0.18984831998263824,
+      "rho_s_closed": 0.19130568257555955,
+      "predicted_variance_ratio": 1.1913056825755595,
+      "simulated_variance_ratio": 1.1806415977762115,
+      "simulated_sd": 1.0865733283015055,
+      "rel_error": 0.009032448813792726,
+      "naive_one_plus_icc": 1.2,
+      "rel_error_naive": 0.016396510389139918,
+      "implied_type1_from_prediction": 0.07253521390580198,
+      "observed_within_patient_rank_corr": 0.19219543483356774,
+      "observed_within_patient_pearson": 0.20116278979345173
+    },
+    {
+      "icc": 0.5,
+      "rho_s_mc": 0.4804169210890979,
+      "rho_s_closed": 0.4825837395309974,
+      "predicted_variance_ratio": 1.4825837395309973,
+      "simulated_variance_ratio": 1.481607124699605,
+      "simulated_sd": 1.2172128510246698,
+      "rel_error": 0.0006591591084514903,
+      "naive_one_plus_icc": 1.5,
+      "rel_error_naive": 0.012414137994999352,
+      "implied_type1_from_prediction": 0.10746214175445967,
+      "observed_within_patient_rank_corr": 0.47819108649789027,
+      "observed_within_patient_pearson": 0.49877300701933547
+    },
+    {
+      "icc": 0.8,
+      "rho_s_mc": 0.7862088095500701,
+      "rho_s_closed": 0.7859392826067277,
+      "predicted_variance_ratio": 1.7859392826067277,
+      "simulated_variance_ratio": 1.7757013975130345,
+      "simulated_sd": 1.3325544632445738,
+      "rel_error": 0.0057655443128175055,
+      "naive_one_plus_icc": 1.8,
+      "rel_error_naive": 0.013683946254137602,
+      "implied_type1_from_prediction": 0.1424747471283161,
+      "observed_within_patient_rank_corr": 0.7784453293483357,
+      "observed_within_patient_pearson": 0.7975662037593334
+    }
+  ]
+}

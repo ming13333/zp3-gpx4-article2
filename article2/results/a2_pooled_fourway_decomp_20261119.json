@@ -1,0 +1,94 @@
+{
+ "source": {
+  "expr": "GSE91061_BMS038109Sample.hg19KnownGene.fpkm.csv",
+  "masks": "framework_cohort_masks_v2.json",
+  "gene": "ZP3 (Entrez 7784)",
+  "framework": "B_naive_pooled",
+  "n_samples": 105,
+  "n_R": 23,
+  "n_N": 82
+ },
+ "cells": {
+  "Pre_R": {
+   "n": 10,
+   "median": 0.783734
+  },
+  "Pre_N": {
+   "n": 39,
+   "median": 0.981547
+  },
+  "On_R": {
+   "n": 13,
+   "median": 0.560206
+  },
+  "On_N": {
+   "n": 43,
+   "median": 1.072425
+  }
+ },
+ "four_way": [
+  {
+   "cell": "Pre_R_vs_Pre_N",
+   "n_R": 10,
+   "n_N": 39,
+   "pairs": 390,
+   "pair_weight_pct": 20.679,
+   "wins_R_gt_N": 157.0,
+   "win_rate_pct": 40.2564,
+   "contribution_to_U_pct": 26.123
+  },
+  {
+   "cell": "Pre_R_vs_On_N",
+   "n_R": 10,
+   "n_N": 43,
+   "pairs": 430,
+   "pair_weight_pct": 22.8,
+   "wins_R_gt_N": 175.0,
+   "win_rate_pct": 40.6977,
+   "contribution_to_U_pct": 29.118
+  },
+  {
+   "cell": "On_R_vs_Pre_N",
+   "n_R": 13,
+   "n_N": 39,
+   "pairs": 507,
+   "pair_weight_pct": 26.882,
+   "wins_R_gt_N": 121.0,
+   "win_rate_pct": 23.8659,
+   "contribution_to_U_pct": 20.133
+  },
+  {
+   "cell": "On_R_vs_On_N",
+   "n_R": 13,
+   "n_N": 43,
+   "pairs": 559,
+   "pair_weight_pct": 29.639,
+   "wins_R_gt_N": 148.0,
+   "win_rate_pct": 26.4758,
+   "contribution_to_U_pct": 24.626
+  }
+ ],
+ "totals": {
+  "U": 601.0,
+  "n_pairs": 1886,
+  "rank_biserial_r": -0.362672,
+  "scipy_P_two_sided": 0.00815,
+  "scipy_U": 601.0
+ },
+ "same_timepoint_pooled": {
+  "U": 305.0,
+  "n_pairs": 949,
+  "rank_biserial_r": -0.357218
+ },
+ "cross_timepoint_pooled": {
+  "U": 296.0,
+  "n_pairs": 937,
+  "rank_biserial_r": -0.368196
+ },
+ "note": "Descriptive decomposition of the observed pooled U statistic into four response x time-point cells. The two cross-time-point cells compare samples drawn at different treatment states and therefore address a different question from a baseline association. This partition is not a test of time-point x response interaction and does not estimate the proportion of true positives among pooled hits.",
+ "consistency_with_frozen": {
+  "frozen_r": -0.3626723223753977,
+  "abs_diff": 0.0,
+  "matches": true
+ }
+}
