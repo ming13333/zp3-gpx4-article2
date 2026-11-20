@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-A2 cross-cohort forest plot: rank-biserial r and 95% CI for the ZP3-response association across three cohorts (2026-08-17 audit-fixed version).
-Data are read automatically from the frozen results table a2_effects_frozen.csv (no longer hardcoded).
-r_rb = 2U/(n1*n2) - 1, positive = higher ZP3 in responders。
-Remove the "pooled effect" wording; note that no pooled effect was computed (cohort heterogeneity: different cancer types/platforms/treatments).
-GSE91061 includes a sensitivity analysis (including on-treatment samples) as a reference annotation.
+Supplementary Figure S1: cross-cohort forest plot of the ZP3-response rank-biserial r.
+Reads the frozen result tables rather than hard-coded values.
+r_rb = 2U/(n1*n2) - 1; positive means higher ZP3 in responders.
+No pooled effect is estimated, because the cohorts differ in tumour type, platform and treatment.
+The GSE91061 sensitivity row reports the 105-sample pooled set with both P values, and quotes no
+interval for it, since the reference distribution for that row is the patient-cluster permutation.
 """
-import os, csv, math
+import os, csv, json, math
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "article2", "figures")
 os.makedirs(OUT, exist_ok=True)
@@ -21,21 +22,32 @@ with open(FROZEN, encoding="utf-8-sig") as f:
             "r": float(r["r_rb"]), "lo": float(r["CI_low"]), "hi": float(r["CI_high"]),
             "nr": int(r["n_resp"]), "nn": int(r["n_non"]),
         })
-# Fixed cohort order
+# fixed cohort order
 order = {"GSE78220": 0, "IMvigor210": 1, "GSE91061": 2}
 cohorts.sort(key=lambda c: order.get(c["lab"].split("\n")[0], 9))
 
-# GSE91061 sensitivity analysis (including on-treatment samples)
+# GSE91061 sensitivity analysis, including on-treatment samples
 sens_note = None
 with open(SENS, encoding="utf-8-sig") as f:
     for r in csv.DictReader(f):
         if r["Cohort"] == "GSE91061" and "All" in r["Scope"]:
-            sens_note = f"GSE91061 incl. on-treatment: P={float(r['P']):.3f}, r={float(r['r_rb']):+.2f} ({r['CI_str']})"
+            sens_r, sens_p = float(r["r_rb"]), float(r["P"])
 
-W, H = 720, 640
-x0, x1 = 300, 620          # forest plot x range
-y0, y1 = 100, 480          # plot area y range
-rmin, rmax = -0.9, 0.9     # r-axis range (symmetric, includes negative side)
+# the pooled 105-sample row is described by both P values; no interval is quoted for it
+sens_note = f"GSE91061 pooled, 105 samples: r={sens_r:+.2f}, nominal P={sens_p:.3f}"
+CLUST = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                      "article2", "results", "a2_zp3_cluster_perm_v15_20261119.json")
+cluster_p = None
+with open(CLUST, encoding="utf-8") as _fh:
+    _b = json.load(_fh)["B"]
+cluster_p = _b["p_addone"] if _b["n_samples"] == 105 else None
+if sens_note is not None and cluster_p is not None:
+    sens_note += f", cluster P={cluster_p:.3f}"
+
+W, H = 780, 660
+x0, x1 = 300, 620          # forest-plot x extent
+y0, y1 = 100, 480          # plotting y extent
+rmin, rmax = -0.9, 0.9     # r axis, symmetric about zero
 
 def lin(v, vmin, vmax, px0, px1):
     return px0 + (v - vmin) / (vmax - vmin) * (px1 - px0)
@@ -79,16 +91,17 @@ for i, c in enumerate(cohorts):
     xlo, xhi, xr = lin(c["lo"], rmin, rmax, x0, x1), lin(c["hi"], rmin, rmax, x0, x1), lin(c["r"], rmin, rmax, x0, x1)
     s += line(xlo, cy, xhi, cy, "#666", 2)
     s += line(xlo, cy - 8, xlo, cy + 8, "#666", 2) + line(xhi, cy - 8, xhi, cy + 8, "#666", 2)
-    s += rect(xr - 6, cy - 6, 12, 12, "#2980b9", "#000", 1)  # All three cohorts non-significant -> blue
+    s += rect(xr - 6, cy - 6, 12, 12, "#2980b9", "#000", 1)  # all three primary analyses are non-significant: blue
     s += txt(x1 + 14, cy + 2, f"{c['r']:.3f} ({c['lo']:.2f}, {c['hi']:.2f})", 10, "start")
 
-# Legend and notes
+# legend and notes
 s += txt(40, y1 + 40, "Blue dots: not statistically significant (all three primary analyses).", 10, fill="#555")
 s += txt(40, y1 + 58, "Effect estimates varied across cohorts; no pooled effect was estimated because the cohorts differ in", 9, fill="#777")
 s += txt(40, y1 + 72, "tumor type, treatment, platform and analysis sample (pre-treatment only unless noted).", 9, fill="#777")
 if sens_note:
     s += txt(40, y1 + 90, sens_note + " (sensitivity; not a primary analysis).", 9, fill="#c0392b")
-s += txt(40, y1 + 108, "Source: a2_effects_frozen.csv; CI by normal approximation of rank-biserial r.", size=9, fill="#777")
+s += txt(40, y1 + 108, "Sources: a2_effects_frozen.csv for the three cohort rows; a2_zp3_cluster_perm_v15_20261119.json", size=9, fill="#777")
+s += txt(40, y1 + 122, "for the pooled row. Cohort intervals are normal approximations of rank-biserial r.", size=9, fill="#777")
 s += "</svg>"
 
 with open(os.path.join(OUT, "A2_SuppS1.svg"), "w", encoding="utf-8") as f:

@@ -78,5 +78,14 @@ inside this directory and reproduced their committed outputs byte for byte.
 The S1 rank-scale approximation is a conditional result for the balanced two-time-point, continuous-Gaussian,
 no-time-shift design; it is not carried to the real cohorts or to S2.
 
+## v1.5 - Figure S1
+
+The GSE91061 row of Supplementary Figure S1 quoted an independent-sample interval,
+-0.63 to -0.09, for the 105-sample pooled set. That is the reference the manuscript argues
+against for a pooled statistic. The row now reports r = -0.36 with both P values (nominal 0.008,
+patient-cluster permutation 0.028) and quotes no interval. `generate_forest_plot.py` and
+`A2_SuppS1.svg` are added to the manifest; re-running the script in this directory reproduces
+the committed SVG byte for byte.
+
 ## Author
 Ming Luo — Lishui Central Hospital / The Fifth Affiliated Hospital of Wenzhou Medical University, Wenzhou, China.

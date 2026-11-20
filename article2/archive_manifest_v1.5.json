@@ -1,0 +1,213 @@
+{
+ "archive_version": "v1.5",
+ "concept_doi": "10.5281/zenodo.22096061",
+ "scope": "v1.5 adds generate_forest_plot.py and Figure S1 (the pooled row now reports both P values and no interval) to the v15 analysis layer: the S1-S4 simulation grid, the S2 mechanism experiment, the four-cell decomposition, the 42-patient recomputation, the patient-cluster permutation of the 105-sample frameworks, the pooled interval diagnostic, the denominator partition audit, the rank-scale variance approximation and Figures 1-3",
+ "counts": {
+  "scripts": 10,
+  "results": 26,
+  "figures": 4,
+  "total": 40
+ },
+ "files": [
+  {
+   "path": "scripts/a2_p2_sim_core_20261118.py",
+   "bytes": 15014,
+   "sha256": "e00e2b4195ec3c62a9e32aa0fd9bad704f47ec8b3fd1d6ac136e9b10175163bd"
+  },
+  {
+   "path": "scripts/a2_p2_s2_mechanism_20261118.py",
+   "bytes": 4075,
+   "sha256": "b922e93d8db5993c66370911dc3f290241600e33ebfc230fc8723bda728fc80f"
+  },
+  {
+   "path": "scripts/a2_pooled_fourway_decomp_20261119.py",
+   "bytes": 7264,
+   "sha256": "20960454ee35979da674521c49daaaad9c86384a8bd7917a02813ddfffa41dfd"
+  },
+  {
+   "path": "scripts/a2_zp3_fixed42_20261119.py",
+   "bytes": 13147,
+   "sha256": "777b91822902d530f588d90caf4606ae68087702c91f08f41995c2868dacc1f5"
+  },
+  {
+   "path": "scripts/a2_zp3_cluster_perm_v15_20261119.py",
+   "bytes": 4243,
+   "sha256": "b02b8797d65ed490216800058e6c567a20911b0655009aa4d00e067591460882"
+  },
+  {
+   "path": "scripts/a2_zp3_pooled_interval_diag_20261120.py",
+   "bytes": 10412,
+   "sha256": "2835f00de7625713da98da70e66d076438c5c9252bc088d22f4090fd4eaf2315"
+  },
+  {
+   "path": "scripts/a2_p2_partition_audit_20261120.py",
+   "bytes": 5047,
+   "sha256": "558f27d1805b6ec548174028654930632a6205f074717136972bbf3329fe4f1f"
+  },
+  {
+   "path": "scripts/a2_p2_icc_rank_approx_20261120.py",
+   "bytes": 5281,
+   "sha256": "0d86593510152363a7b0256f0408e92a5dadb0059624e70e6840d79549cab309"
+  },
+  {
+   "path": "scripts/gen_figs_v15_20261120.py",
+   "bytes": 20057,
+   "sha256": "6cd598a81511c922d658a396d956ec04fbf125e7f6e3d32f8028655ed284f5c2"
+  },
+  {
+   "path": "scripts/generate_forest_plot.py",
+   "bytes": 6128,
+   "sha256": "7e24fde1a97ec3bc2a047c0a33b5c08845e633b364e096c93d5dc7cf3b6a7362"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full.json",
+   "bytes": 15168,
+   "sha256": "e7696227e13cf92eee64e905b3be286b654aeb9ffe63685ee381fb44945d55b6"
+  },
+  {
+   "path": "results/a2_p2_s2_mechanism_20261118.json",
+   "bytes": 2530,
+   "sha256": "495634194f21cc29fa479082372b98f3e0527696c2423f13687c4ad59e4e9026"
+  },
+  {
+   "path": "results/a2_pooled_fourway_decomp_20261119.json",
+   "bytes": 2201,
+   "sha256": "4063b8630aea598bfa6a719bce3b77a444efeba931b61ce3441723bed17a0abe"
+  },
+  {
+   "path": "results/a2_zp3_fixed42_20261119.json",
+   "bytes": 3500,
+   "sha256": "ef7e497d2ee0482e4383489012d069b80ac0e2541c233bbb27164cbb4f24cceb"
+  },
+  {
+   "path": "results/a2_zp3_cluster_perm_v15_20261119.json",
+   "bytes": 912,
+   "sha256": "8eb0b64b595d664f949d4e6daefae4bd5ad33c07b40ad788ce2687323aadc481"
+  },
+  {
+   "path": "results/a2_zp3_pooled_interval_diag_20261120.json",
+   "bytes": 1637,
+   "sha256": "f81ce37181bec08cf58126a499f8bf92b261c13741de0b521efc6ff0ed55f504"
+  },
+  {
+   "path": "results/a2_p2_partition_audit_20261120.json",
+   "bytes": 15860,
+   "sha256": "988deff7056a19709d450c8c7b23b40f9b39100fa25fe73b7c279be12c8af8b4"
+  },
+  {
+   "path": "results/a2_p2_icc_rank_approx_20261120.json",
+   "bytes": 2097,
+   "sha256": "4e88e15dc0e02558e69123b73437941f18858acb709e238567d45c1c3ec960c9"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np160_rp0.25_icc0.2.json",
+   "bytes": 16856,
+   "sha256": "ce0ae9113cc179451601e1bd8685a5cb97751fb25c87da1182ccd3586814263a"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np160_rp0.25_icc0.5.json",
+   "bytes": 16861,
+   "sha256": "655a08f1b9afb2d73d341f1b36c3280c1f13a8a483219c3cf044823ee43fe6d4"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np160_rp0.25_icc0.8.json",
+   "bytes": 16794,
+   "sha256": "5a55c1c16a3068620e214c45941fc7cb56efcd4137f8652ca6a843de8d346996"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np160_rp0.50_icc0.2.json",
+   "bytes": 16703,
+   "sha256": "f49c0cb38fb3b97e58237c8ec0afede8d0d1eccdb056a03e6872e88b7209d154"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np160_rp0.50_icc0.5.json",
+   "bytes": 16825,
+   "sha256": "7df671c3dd684b063becf63984447f79a5c4df319b1951d7c82ee8e6ef1d725c"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np160_rp0.50_icc0.8.json",
+   "bytes": 16790,
+   "sha256": "40a515cf896527c7590789fadea80dda58166106a0cc2bb8203a2ce63f134f05"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np40_rp0.25_icc0.2.json",
+   "bytes": 15218,
+   "sha256": "4fa897dd660a8cf73fb3e8116ddab23b63ec83e7662b7971677b693dfc6669d3"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np40_rp0.25_icc0.5.json",
+   "bytes": 15281,
+   "sha256": "eb0164154528d5fa02fb378adca13e0795c01f5cae46c9d5dedfd0ac163832e6"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np40_rp0.25_icc0.8.json",
+   "bytes": 15241,
+   "sha256": "bfa6cc0e38479cd9ddc3f6bd1e4361e2feb5d968d63a5a6c698f550d7a9609e2"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np40_rp0.50_icc0.2.json",
+   "bytes": 15210,
+   "sha256": "f011f1577a493e389018d2599f133bde823ee068d0f7901263c0bcac7e0b8af9"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np40_rp0.50_icc0.5.json",
+   "bytes": 15230,
+   "sha256": "8e0abff877d1438e143b02a6981e03331955c926907159fa23b929e3a9ada306"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np40_rp0.50_icc0.8.json",
+   "bytes": 15294,
+   "sha256": "368e90acc70d2267c5c22b194fd14868d933b2353d5fe64a9592ed427af25d00"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np80_rp0.25_icc0.2.json",
+   "bytes": 15232,
+   "sha256": "5dc7290a22e69dc7e1810821713a0c5124c9e931d0e16a75a26ac8a146dbda61"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np80_rp0.25_icc0.5.json",
+   "bytes": 15226,
+   "sha256": "1e4c68a5a5a85163175e020eff6304277e865f38a63adf89250ebd97fde71e0c"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np80_rp0.25_icc0.8.json",
+   "bytes": 15227,
+   "sha256": "3a812f903a17414d1545666f177c6a6278b240a0e6923fcc34952e7b7bdd5787"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np80_rp0.50_icc0.2.json",
+   "bytes": 15204,
+   "sha256": "19492bad4d9e03d3947fe66f6b7ef7b01a1a24689f0ebadfa7f1c2c92ba78122"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np80_rp0.50_icc0.5.json",
+   "bytes": 15135,
+   "sha256": "dc8f5e3962ce24e34ea4ba5fad7298b6a1879ee2ae7ab9fb2eded1c0ebaece71"
+  },
+  {
+   "path": "results/a2_p2_sim_core_20261118_full_np80_rp0.50_icc0.8.json",
+   "bytes": 15180,
+   "sha256": "ea95bb50463002fbe647f0db36074f5a6755cb118c2986b2275e10bea095f1b9"
+  },
+  {
+   "path": "figures/A2v15_Fig1.svg",
+   "bytes": 4642,
+   "sha256": "dccb951e24e4239ba58f19744f11b2d013dade8d401f39db843d7028335068db"
+  },
+  {
+   "path": "figures/A2v15_Fig2.svg",
+   "bytes": 35525,
+   "sha256": "6074fed8e0d7b87a07ecd73d0f6a927f61b9dac2e950be385a88006621b758fb"
+  },
+  {
+   "path": "figures/A2v15_Fig3.svg",
+   "bytes": 13084,
+   "sha256": "dfad2498f74a29bdbb2fe2972f9431a319ee3283472f7104c4b874383cbb3c53"
+  },
+  {
+   "path": "figures/A2_SuppS1.svg",
+   "bytes": 6832,
+   "sha256": "7cf9537e10bec31561f84a5291bb7c8fa8e48bb7f7ad1d308013233f3dda7f7f"
+  }
+ ]
+}
